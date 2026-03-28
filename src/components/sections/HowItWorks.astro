@@ -1,0 +1,146 @@
+---
+const steps = [
+  {
+    num: "01",
+    icon: `<svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 0C5.374 0 0 5.373 0 12c0 2.117.549 4.099 1.508 5.817L.057 23.887a.5.5 0 0 0 .556.556l6.07-1.451C8.362 23.658 10.118 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm5.53 17.12c-.272.767-1.571 1.462-2.147 1.524-.549.058-1.25.084-2.015-.124-.464-.13-1.059-.302-1.825-.631-3.21-1.387-5.3-4.626-5.462-4.839-.163-.214-1.329-1.768-1.329-3.374 0-1.604.839-2.392 1.137-2.718.271-.296.591-.37.789-.37.197 0 .394.002.566.01.182.008.426-.069.667.509.251.599.853 2.083.927 2.234.075.152.124.33.025.532-.099.2-.149.327-.296.503-.148.175-.311.392-.444.527-.148.148-.302.31-.13.607.173.297.769 1.268 1.651 2.053 1.133 1.011 2.089 1.325 2.386 1.473.297.148.47.124.643-.074.173-.198.74-.863 1.038-1.16.198-.198.397-.149.668.025.272.173 1.727.815 2.024.964.297.149.495.223.568.347.074.124.074.718-.198 1.485z"/></svg>`,
+    color: "var(--accent)",
+    colorRgb: "232,25,44",
+    title: "Contactez-nous sur WhatsApp",
+    desc: "Envoyez-nous un message WhatsApp pour commander ou demander votre test gratuit 24h. Notre équipe répond en moins de 5 minutes.",
+    cta: "Commander maintenant",
+    href: "https://wa.me/33XXXXXXXXX?text=Bonjour%2C+je+souhaite+commander+Atlas+Pro+ONTV",
+  },
+  {
+    num: "02",
+    icon: `<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="22,4 12,13 2,4"/></svg>`,
+    color: "var(--gold)",
+    colorRgb: "232,160,32",
+    title: "Recevez vos identifiants",
+    desc: "Recevez instantanément votre lien M3U, code Xtream ou URL portail MAG par email ou WhatsApp, accompagné d'un guide d'installation.",
+    cta: null,
+    href: null,
+  },
+  {
+    num: "03",
+    icon: `<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5,3 19,12 5,21"/></svg>`,
+    color: "var(--green)",
+    colorRgb: "16,185,129",
+    title: "Regardez tout, partout",
+    desc: "Installez l'app via le code Downloader, entrez vos identifiants et commencez à regarder +15 000 chaînes en HD/4K instantanément.",
+    cta: "Voir les appareils compatibles",
+    href: "/telechargement",
+  },
+];
+---
+<section id="comment-ca-marche" style="position:relative;padding:7rem 0;background:var(--bg-section);overflow:hidden;" class="bg-grid">
+
+  <!-- Orbs -->
+  <div class="orb" style="width:500px;height:500px;background:radial-gradient(circle,rgba(79,142,247,0.06) 0%,transparent 70%);top:-80px;left:-100px;"></div>
+  <div class="orb" style="width:400px;height:400px;background:radial-gradient(circle,rgba(16,185,129,0.05) 0%,transparent 70%);bottom:0;right:-80px;"></div>
+
+  <!-- Top divider -->
+  <div style="position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent);"></div>
+
+  <div style="max-width:1100px;margin:0 auto;padding:0 1.5rem;position:relative;z-index:1;">
+
+    <!-- Header -->
+    <div style="text-align:center;margin-bottom:5rem;" class="fade-in-up">
+      <span class="section-label lbl-red">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/></svg>
+        Comment ça marche
+      </span>
+      <h2 style="font-family:'Outfit',sans-serif;font-size:clamp(2.2rem,3.8vw,3.2rem);font-weight:800;line-height:1.1;color:#fff;margin-top:0.75rem;margin-bottom:1.25rem;">
+        En 3 étapes, <span style="color:var(--accent);">regardez tout</span>
+      </h2>
+      <p style="font-family:'Barlow',sans-serif;font-size:1rem;color:var(--text-muted);max-width:480px;margin:0 auto;line-height:1.8;">
+        De la commande à la diffusion en <strong style="color:#fff;">moins de 5 minutes.</strong>
+      </p>
+    </div>
+
+    <!-- Steps -->
+    <div style="display:grid;grid-template-columns:1fr auto 1fr auto 1fr;align-items:start;gap:0;" class="steps-grid fade-in-up">
+      {steps.map((step, i) => (
+        <>
+          <div style="text-align:center;padding:0 1rem;">
+            <!-- Big Cormorant number -->
+            <div style={`font-family:var(--font-display);font-size:5rem;font-weight:700;color:rgba(${step.colorRgb},0.12);line-height:1;margin-bottom:-1.5rem;user-select:none;`}>
+              {step.num}
+            </div>
+
+            <!-- Icon circle -->
+            <div style={`width:72px;height:72px;background:rgba(${step.colorRgb},0.1);border:2px solid rgba(${step.colorRgb},0.3);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem;color:${step.color};position:relative;z-index:1;`}>
+              <span set:html={step.icon} />
+            </div>
+
+            <h3 style="font-family:var(--font-sans);font-weight:700;font-size:1.05rem;color:var(--text);margin-bottom:0.75rem;letter-spacing:0.01em;">{step.title}</h3>
+            <p style="font-family:var(--font-body);font-size:0.875rem;color:var(--text-muted);line-height:1.75;margin-bottom:1.25rem;">{step.desc}</p>
+
+            {step.cta && step.href && (
+              <a
+                href={step.href}
+                target={step.href.startsWith('http') ? '_blank' : undefined}
+                rel={step.href.startsWith('http') ? 'noopener' : undefined}
+                style={`display:inline-flex;align-items:center;gap:6px;padding:8px 18px;border:1px solid rgba(${step.colorRgb},0.35);background:rgba(${step.colorRgb},0.08);color:${step.color};border-radius:20px;font-family:var(--font-sans);font-weight:600;font-size:0.8rem;text-decoration:none;transition:all 0.2s;letter-spacing:0.02em;`}
+              >
+                {step.cta}
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </a>
+            )}
+          </div>
+
+          <!-- Connector arrow (between steps) -->
+          {i < 2 && (
+            <div class="step-connector" style="display:flex;align-items:center;justify-content:center;padding-top:6.5rem;">
+              <svg width="40" height="24" viewBox="0 0 40 24" fill="none">
+                <line x1="0" y1="12" x2="30" y2="12" stroke="var(--border)" stroke-width="1.5" stroke-dasharray="4,3"/>
+                <polyline points="24,6 32,12 24,18" stroke="var(--border)" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+          )}
+        </>
+      ))}
+    </div>
+
+    <!-- Bottom CTA box -->
+    <div style="margin-top:5rem;padding:2.5rem 3rem;background:var(--bg-card);border:1px solid var(--border);border-radius:20px;display:flex;align-items:center;justify-content:space-between;gap:2rem;flex-wrap:wrap;" class="fade-in-up">
+      <div>
+        <h3 style="font-family:var(--font-display);font-size:1.75rem;font-weight:700;color:var(--text);margin-bottom:0.4rem;line-height:1.2;">
+          Prêt à commencer ?
+        </h3>
+        <p style="font-family:var(--font-body);font-size:0.9rem;color:var(--text-muted);line-height:1.6;">
+          Test gratuit 24h · Sans carte bancaire · Sans engagement · Annulation facile.
+        </p>
+      </div>
+      <a
+        href="https://wa.me/33XXXXXXXXX?text=Bonjour%2C+je+voudrais+un+test+gratuit+24h+Atlas+Pro+ONTV"
+        target="_blank"
+        rel="noopener"
+        class="btn-orange"
+        style="flex-shrink:0;"
+      >
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 2.117.549 4.099 1.508 5.817L.057 23.887a.5.5 0 0 0 .556.556l6.07-1.451C8.362 23.658 10.118 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm5.53 17.12c-.272.767-1.571 1.462-2.147 1.524-.549.058-1.25.084-2.015-.124-.464-.13-1.059-.302-1.825-.631-3.21-1.387-5.3-4.626-5.462-4.839-.163-.214-1.329-1.768-1.329-3.374 0-1.604.839-2.392 1.137-2.718.271-.296.591-.37.789-.37.197 0 .394.002.566.01.182.008.426-.069.667.509.251.599.853 2.083.927 2.234.075.152.124.33.025.532-.099.2-.149.327-.296.503-.148.175-.311.392-.444.527-.148.148-.302.31-.13.607.173.297.769 1.268 1.651 2.053 1.133 1.011 2.089 1.325 2.386 1.473.297.148.47.124.643-.074.173-.198.74-.863 1.038-1.16.198-.198.397-.149.668.025.272.173 1.727.815 2.024.964.297.149.495.223.568.347.074.124.074.718-.198 1.485z"/></svg>
+        Tester Gratuitement 24h
+      </a>
+    </div>
+
+  </div>
+
+  <!-- Bottom divider -->
+  <div style="position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent);"></div>
+</section>
+
+<style>
+  @media (max-width: 780px) {
+    .steps-grid {
+      grid-template-columns: 1fr !important;
+    }
+    .step-connector { display: none !important; }
+  }
+</style>
+
+<script>
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('#comment-ca-marche .fade-in-up').forEach(el => obs.observe(el));
+</script>

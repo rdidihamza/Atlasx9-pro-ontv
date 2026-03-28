@@ -1,0 +1,103 @@
+---
+import '../../styles/global.css';
+import { AGGREGATE_RATING } from '../../data/reviews';
+import CookieBanner from './CookieBanner.astro';
+
+export interface Props {
+  title?: string;
+  description?: string;
+  canonical?: string;
+  ogImage?: string;
+}
+
+const {
+  title = "Atlas Pro ONTV — N°1 IPTV France | +15 000 Chaînes HD/4K | Coupe du Monde 2026",
+  description = "Atlas Pro ONTV : meilleur abonnement IPTV en France. +15 000 chaînes HD/4K, +70 000 films & séries VOD, Coupe du Monde 2026 en direct. Dès 39,99€/an. Test gratuit 24h. Support WhatsApp 24h/7j.",
+  canonical = "https://atlasproontv.fr",
+  ogImage = "https://atlasproontv.fr/images/og-image.webp",
+} = Astro.props;
+
+const jsonLdApp = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Atlas Pro ONTV",
+  "applicationCategory": "MultimediaApplication",
+  "operatingSystem": "Android, iOS, Windows, macOS, Smart TV",
+  "description": description,
+  "url": canonical,
+  "offers": {
+    "@type": "AggregateOffer",
+    "lowPrice": "39.99",
+    "highPrice": "89.99",
+    "priceCurrency": "EUR",
+    "offerCount": "3"
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": AGGREGATE_RATING.ratingValue,
+    "ratingCount": AGGREGATE_RATING.ratingCount,
+    "bestRating": AGGREGATE_RATING.bestRating,
+    "worstRating": AGGREGATE_RATING.worstRating
+  }
+};
+
+const jsonLdOrg = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Atlas Pro ONTV",
+  "url": "https://atlasproontv.fr",
+  "logo": "https://atlasproontv.fr/images/logo.webp",
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "contactType": "customer service",
+    "availableLanguage": ["French"],
+    "contactOption": "TollFree"
+  },
+  "sameAs": []
+};
+---
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+  <title>{title}</title>
+  <meta name="title" content={title} />
+  <meta name="description" content={description} />
+  <meta name="keywords" content="atlas pro ontv, iptv france, abonnement iptv, atlas pro iptv, ontv iptv, coupe du monde 2026, iptv 4k, iptv hd, firestick iptv, smarters iptv, bein sports iptv, rmc sport iptv" />
+  <meta name="author" content="Atlas Pro ONTV" />
+  <meta name="robots" content="index, follow" />
+  <meta name="language" content="French" />
+  <link rel="canonical" href={canonical} />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content={canonical} />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:image" content={ogImage} />
+  <meta property="og:locale" content="fr_FR" />
+  <meta property="og:site_name" content="Atlas Pro ONTV" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:url" content={canonical} />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content={ogImage} />
+
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="sitemap" href="/sitemap.xml" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLdApp)} />
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLdOrg)} />
+</head>
+<body>
+  <slot />
+  <CookieBanner />
+</body>
+</html>

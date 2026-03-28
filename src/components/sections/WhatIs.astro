@@ -1,0 +1,128 @@
+---
+---
+<section id="a-propos" style="position:relative;padding:7rem 0;background:var(--bg);overflow:hidden;">
+
+  <!-- Decorative orbs -->
+  <div class="orb" style="width:600px;height:600px;background:radial-gradient(circle,rgba(79,142,247,0.06) 0%,transparent 70%);top:-180px;left:-200px;"></div>
+  <div class="orb" style="width:400px;height:400px;background:radial-gradient(circle,rgba(232,160,32,0.05) 0%,transparent 70%);bottom:-100px;right:-80px;"></div>
+
+  <!-- Top divider -->
+  <div style="position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent);"></div>
+
+  <div style="max-width:1280px;margin:0 auto;padding:0 1.5rem;position:relative;z-index:1;">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;" class="whatis-grid">
+
+      <!-- ── LEFT COLUMN ── -->
+      <div class="fade-in-up">
+        <span class="section-label lbl-blue">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          À Propos
+        </span>
+
+        <h2 style="font-family:var(--font-display);font-size:clamp(2.2rem,3.8vw,3.5rem);font-weight:700;line-height:1.1;color:var(--text);margin-bottom:2rem;">
+          Qu'est-ce qu'<em style="font-style:italic;color:var(--accent);">Atlas Pro ONTV</em>&nbsp;?
+        </h2>
+
+        <!-- Large decorative quote block -->
+        <div style="position:relative;margin-bottom:2.5rem;">
+          <span style="font-family:var(--font-display);font-size:11rem;line-height:0.75;color:var(--accent);opacity:0.07;position:absolute;top:-2rem;left:-2rem;user-select:none;pointer-events:none;font-style:italic;">"</span>
+          <blockquote style="position:relative;z-index:1;padding:1.75rem 1.75rem 1.75rem 2rem;background:var(--bg-card);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:0 14px 14px 0;">
+            <p style="font-family:var(--font-display);font-size:1.45rem;font-style:italic;font-weight:600;color:var(--text);line-height:1.5;margin-bottom:0.75rem;">
+              L'IPTV premium que la France attendait — qualité cinéma, disponibilité sans faille.
+            </p>
+            <footer style="font-family:var(--font-sans);font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-muted);">
+              — Service N°1 en France depuis 2020
+            </footer>
+          </blockquote>
+        </div>
+
+        <!-- Stat pills -->
+        <div style="display:flex;flex-wrap:wrap;gap:0.875rem;">
+          {[
+            { val: "50 000+", lbl: "Abonnés actifs",  color: "var(--accent)" },
+            { val: "N°1",     lbl: "IPTV France",      color: "var(--gold)"   },
+            { val: "99.9%",   lbl: "Uptime garanti",   color: "var(--green)"  },
+          ].map(s => (
+            <div style={`display:flex;flex-direction:column;align-items:center;gap:4px;padding:0.9rem 1.4rem;background:var(--bg-card);border:1px solid var(--border);border-radius:12px;`}>
+              <span style={`font-family:var(--font-display);font-size:1.7rem;font-weight:700;color:${s.color};line-height:1;`}>{s.val}</span>
+              <span style="font-family:var(--font-sans);font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-muted);">{s.lbl}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- ── RIGHT COLUMN ── -->
+      <div class="fade-in-up delay-2">
+        <p style="font-family:var(--font-body);font-size:1.05rem;line-height:1.9;color:var(--text-dim);margin-bottom:2rem;">
+          <strong style="color:var(--text);font-weight:600;">Atlas Pro ONTV</strong> est le service IPTV numéro un en France, avec plus de
+          <strong style="color:var(--accent);">50 000 abonnés satisfaits</strong>. Grâce à une infrastructure serveurs
+          européenne entièrement redondante, nous garantissons un accès fluide et stable à tout moment, sur tous vos appareils,
+          en <strong style="color:var(--text);">SD, HD, Full HD et 4K UHD</strong>.
+        </p>
+
+        <!-- Feature bullet list -->
+        <div style="display:flex;flex-direction:column;gap:1.4rem;">
+          {[
+            {
+              title: "+15 000 Chaînes en Direct",
+              desc: "TF1, M6, beIN Sports, Al Jazeera, RMC — françaises, arabes, sportives et internationales.",
+              color: "var(--accent)",
+            },
+            {
+              title: "+70 000 Films & Séries VOD",
+              desc: "La bibliothèque VOD la plus complète : dernières sorties, séries en cours, classiques du cinéma.",
+              color: "var(--gold)",
+            },
+            {
+              title: "Catch-Up & Replay 7 Jours",
+              desc: "Revoyez vos programmes préférés jusqu'à 7 jours après leur diffusion en direct.",
+              color: "var(--green)",
+            },
+            {
+              title: "Compatible tous appareils",
+              desc: "Firestick, Android, iOS, Smart TV Samsung & LG, MAG, PC, Mac — une seule app pour tout.",
+              color: "var(--orange)",
+            },
+          ].map(item => (
+            <div style="display:flex;align-items:flex-start;gap:1rem;">
+              <div style={`width:8px;height:8px;min-width:8px;background:${item.color};border-radius:2px;margin-top:8px;flex-shrink:0;`}></div>
+              <div>
+                <div style="font-family:var(--font-sans);font-weight:700;font-size:0.9rem;color:var(--text);margin-bottom:0.3rem;letter-spacing:0.01em;">{item.title}</div>
+                <p style="font-family:var(--font-body);font-size:0.875rem;line-height:1.7;color:var(--text-muted);">{item.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <!-- CTAs -->
+        <div style="margin-top:2.5rem;display:flex;gap:1rem;flex-wrap:wrap;">
+          <a href="#abonnement" class="btn-primary">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            Voir les formules
+          </a>
+          <a href="https://wa.me/33XXXXXXXXX?text=Bonjour%2C+je+voudrais+un+test+gratuit+24h+Atlas+Pro+ONTV" target="_blank" rel="noopener" class="btn-ghost">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            Test gratuit 24h
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Bottom divider -->
+  <div style="position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent);"></div>
+</section>
+
+<style>
+  @media (max-width: 900px) {
+    .whatis-grid { grid-template-columns: 1fr !important; gap: 3rem !important; }
+  }
+</style>
+
+<script>
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('#a-propos .fade-in-up').forEach(el => obs.observe(el));
+</script>

@@ -1,0 +1,174 @@
+---
+import { CHANNEL_CATEGORIES } from '../../data/channels';
+
+// Map categories to filmbox-style card colors
+const colorMap: Record<string, { accent: string; rgb: string }> = {
+  blue:   { accent: '#6FA0FF', rgb: '111,160,255' },
+  green:  { accent: '#22C55E', rgb: '34,197,94'   },
+  gold:   { accent: '#FFC107', rgb: '255,193,7'   },
+  purple: { accent: '#A78BFA', rgb: '167,139,250' },
+  orange: { accent: '#F97316', rgb: '249,115,22'  },
+  cyan:   { accent: '#22D3EE', rgb: '34,211,238'  },
+  yellow: { accent: '#EAB308', rgb: '234,179,8'   },
+  red:    { accent: '#E8192C', rgb: '232,25,44'   },
+};
+---
+<section id="chaines" style="position:relative;padding:7rem 0;background:var(--bg-section);overflow:hidden;">
+
+  <div class="orb" style="width:500px;height:500px;background:radial-gradient(circle,rgba(232,25,44,0.06) 0%,transparent 70%);top:-80px;left:50%;transform:translateX(-50%);"></div>
+  <div style="position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent);"></div>
+
+  <div style="max-width:1280px;margin:0 auto;padding:0 1.5rem;position:relative;z-index:1;">
+
+    <!-- Header + filter bar (filmbox Recommendations style) -->
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:3rem;flex-wrap:wrap;gap:1.5rem;" class="fade-in-up">
+      <div>
+        <span class="section-label lbl-red">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+          Catalogue
+        </span>
+        <h2 style="font-family:'Outfit',sans-serif;font-size:clamp(2.2rem,3.8vw,3.2rem);font-weight:800;color:#fff;margin-top:0.75rem;line-height:1.1;">
+          +15 000 chaînes <span style="color:var(--accent);">à portée</span> de main
+        </h2>
+      </div>
+      <!-- Filter pills (filmbox style) -->
+      <div style="display:flex;gap:8px;flex-wrap:wrap;">
+        <button class="btn-pill active">Tout ▾</button>
+        <button class="btn-pill">Catégorie ▾</button>
+        <button class="btn-pill">Sport</button>
+        <div style="display:flex;align-items:center;gap:6px;padding:7px 14px;background:rgba(255,255,255,0.05);border:1px solid var(--border);border-radius:50px;">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <span style="font-family:'Outfit',sans-serif;font-size:0.78rem;color:var(--text-muted);">Chercher...</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stat pills row -->
+    <div style="display:flex;flex-wrap:wrap;gap:1rem;margin-bottom:3rem;" class="fade-in-up">
+      {[
+        { num:"+15 000", lbl:"Chaînes en direct", color:"#E8192C" },
+        { num:"+70 000", lbl:"Films & Séries VOD", color:"#FFC107" },
+        { num:"8",       lbl:"Catégories",         color:"#22C55E" },
+        { num:"40+",     lbl:"Pays couverts",      color:"#6FA0FF" },
+      ].map(s => (
+        <div style={`display:flex;align-items:center;gap:10px;padding:10px 20px;background:var(--bg-card);border:1px solid var(--border);border-radius:50px;`}>
+          <span style={`font-family:'Outfit',sans-serif;font-weight:800;font-size:1.2rem;color:${s.color};line-height:1;`}>{s.num}</span>
+          <span style="font-family:'Outfit',sans-serif;font-size:0.75rem;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;color:var(--text-muted);">{s.lbl}</span>
+        </div>
+      ))}
+    </div>
+
+    <!-- Sport banner -->
+    <div style="margin-bottom:3rem;border-radius:16px;overflow:hidden;position:relative;" class="fade-in-up">
+      <img
+        src="/banner-sport-en-direct.jpeg"
+        alt="Sport en direct — beIN Sports, Canal+, RMC Sport"
+        style="width:100%;display:block;height:220px;object-fit:cover;"
+      />
+      <div style="position:absolute;inset:0;background:linear-gradient(to right,rgba(12,12,18,0.85),rgba(12,12,18,0.2));display:flex;align-items:center;padding:2.5rem;">
+        <div>
+          <div style="font-family:'Outfit',sans-serif;font-size:0.68rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--accent);margin-bottom:0.5rem;">⚽ Coupe du Monde 2026</div>
+          <h3 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:1.6rem;color:#fff;margin-bottom:0.5rem;">Sport en Direct — beIN, Canal+, RMC Sport</h3>
+          <p style="font-family:'Barlow',sans-serif;font-size:0.9rem;color:var(--text-muted);">Tous les grands matchs en HD/4K, sans interruption.</p>
+        </div>
+      </div>
+      <!-- Subscribe badge -->
+      <div style="position:absolute;top:16px;left:16px;background:var(--accent);color:white;font-family:'Outfit',sans-serif;font-size:0.62rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:4px 12px;border-radius:20px;">En Direct</div>
+    </div>
+
+    <!-- Category grid — filmbox movie-card style -->
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:1.25rem;" class="channels-grid">
+      {CHANNEL_CATEGORIES.map((cat, i) => {
+        const c = colorMap[cat.color] || colorMap.blue;
+        return (
+          <div
+            class={`fade-in-up delay-${(i % 4) + 1}`}
+            style={`
+              background: var(--bg-card);
+              border: 1px solid ${cat.featured ? `rgba(${c.rgb},0.35)` : 'var(--border)'};
+              border-radius: 14px;
+              padding: 1.5rem;
+              position: relative;
+              overflow: hidden;
+              transition: all .3s ease;
+              ${cat.featured ? `box-shadow: 0 0 40px rgba(${c.rgb},0.08);` : ''}
+            `}
+            onmouseover={`this.style.borderColor='rgba(${c.rgb},0.5)';this.style.transform='translateY(-3px)';this.style.boxShadow='0 16px 40px rgba(${c.rgb},0.12)'`}
+            onmouseout={`this.style.borderColor='${cat.featured ? `rgba(${c.rgb},0.35)` : 'var(--border)'}';this.style.transform='translateY(0)';this.style.boxShadow='${cat.featured ? `0 0 40px rgba(${c.rgb},0.08)` : 'none'}'`}
+          >
+            <!-- Top accent line -->
+            <div style={`position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,${c.accent},transparent);`}></div>
+
+            <!-- Subscribe badge if featured -->
+            {cat.featured && (
+              <div style="position:absolute;top:12px;right:12px;">
+                <span class="subscribe-badge">★ Featured</span>
+              </div>
+            )}
+
+            <!-- Category header -->
+            <div style="display:flex;align-items:center;gap:12px;margin-bottom:1.25rem;">
+              <div style={`width:44px;height:44px;background:rgba(${c.rgb},0.1);border:1px solid rgba(${c.rgb},0.2);border-radius:10px;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-weight:600;font-size:1.1rem;color:${c.accent};flex-shrink:0;`}>{cat.icon}</div>
+              <h3 style="font-family:'Outfit',sans-serif;font-weight:700;font-size:0.95rem;color:#fff;">{cat.label}</h3>
+            </div>
+
+            <!-- Channel badges -->
+            <div style="display:flex;flex-wrap:wrap;gap:6px;">
+              {cat.channels.map((ch: string) => (
+                <span
+                  class="channel-badge"
+                  style="padding:4px 10px;background:rgba(255,255,255,0.05);border:1px solid var(--border);border-radius:20px;color:var(--text-muted);font-family:'Barlow',sans-serif;font-size:0.75rem;transition:all .2s;"
+                >
+                  {ch}
+                </span>
+              ))}
+              <span style={`padding:4px 10px;background:rgba(${c.rgb},0.1);border:1px solid rgba(${c.rgb},0.25);border-radius:20px;color:${c.accent};font-family:'Outfit',sans-serif;font-size:0.72rem;font-weight:600;`}>
+                + bien plus…
+              </span>
+            </div>
+          </div>
+        );
+      })}
+    </div>
+
+    <!-- Pagination (filmbox style) -->
+    <div style="display:flex;align-items:center;justify-content:center;gap:8px;margin-top:3rem;" class="fade-in-up">
+      <button style="width:30px;height:30px;background:rgba(255,255,255,0.08);border:1px solid var(--border);border-radius:6px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--text-muted);">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15,18 9,12 15,6"/></svg>
+      </button>
+      {[1,2,3,4].map((n, i) => (
+        <button style={`width:30px;height:30px;border-radius:6px;border:1px solid ${i === 0 ? 'var(--accent)' : 'var(--border)'};background:${i === 0 ? 'var(--accent)' : 'rgba(255,255,255,0.05)'};font-family:'Outfit',sans-serif;font-size:0.8rem;font-weight:700;color:${i === 0 ? 'white' : 'var(--text-muted)'};cursor:pointer;`}>{n}</button>
+      ))}
+      <span style="font-family:'Outfit',sans-serif;font-size:0.8rem;color:var(--text-muted);">…</span>
+      <button style="width:30px;height:30px;background:rgba(255,255,255,0.08);border:1px solid var(--border);border-radius:6px;font-family:'Outfit',sans-serif;font-size:0.8rem;color:var(--text-muted);cursor:pointer;">25</button>
+      <button style="width:30px;height:30px;background:rgba(255,255,255,0.08);border:1px solid var(--border);border-radius:6px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--text-muted);">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9,18 15,12 9,6"/></svg>
+      </button>
+    </div>
+
+    <p style="text-align:center;font-family:'Barlow',sans-serif;color:var(--text-muted);font-size:0.82rem;margin-top:2rem;line-height:1.7;" class="fade-in-up">
+      Le catalogue est mis à jour en permanence. Certaines chaînes peuvent varier selon les offres des diffuseurs.
+    </p>
+  </div>
+
+  <div style="position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent);"></div>
+</section>
+
+<style>
+  @media (max-width: 600px) { .channels-grid { grid-template-columns: 1fr !important; } }
+</style>
+
+<script>
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('#chaines .fade-in-up').forEach(el => obs.observe(el));
+
+  // Filter pills toggle
+  document.querySelectorAll('.btn-pill').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.btn-pill').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    });
+  });
+</script>

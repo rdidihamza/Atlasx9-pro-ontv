@@ -1,0 +1,108 @@
+---
+const features = [
+  { num:"01", icon:`<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/><circle cx="12" cy="10" r="2.5"/></svg>`, title:"+15 000 Chaînes en Direct", desc:"Chaînes françaises, arabes, sportives, cinéma, actualités — tout en un seul abonnement.", color:"#E8192C", rgb:"232,25,44" },
+  { num:"02", icon:`<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="2.18"/><line x1="7" y1="2" x2="7" y2="22"/><line x1="17" y1="2" x2="17" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/></svg>`, title:"+70 000 Films & Séries VOD", desc:"Bibliothèque VOD illimitée avec les dernières sorties cinéma et séries à la demande.", color:"#FFC107", rgb:"255,193,7" },
+  { num:"03", icon:`<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>`, title:"Qualité 4K UHD / Full HD", desc:"Image d'une clarté exceptionnelle — SD, HD, Full HD et 4K UHD selon les chaînes.", color:"#22C55E", rgb:"34,197,94" },
+  { num:"04", icon:`<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/></svg>`, title:"Catch-Up & Replay 7 Jours", desc:"Revoyez vos programmes préférés jusqu'à 7 jours après leur diffusion.", color:"#F97316", rgb:"249,115,22" },
+  { num:"05", icon:`<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>`, title:"EPG Guide des Programmes", desc:"Guide électronique des programmes complet sur 7 jours pour ne jamais manquer vos émissions.", color:"#22D3EE", rgb:"34,211,238" },
+  { num:"06", icon:`<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>`, title:"99.9% Disponibilité Garantie", desc:"Infrastructure serveurs redondante en Europe pour une disponibilité maximale garantie.", color:"#22C55E", rgb:"34,197,94" },
+  { num:"07", icon:`<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>`, title:"Support WhatsApp 24h/7j", desc:"Assistance francophone 24h/24, 7j/7 via WhatsApp. Temps de réponse moyen : 5 minutes.", color:"#22C55E", rgb:"34,197,94" },
+  { num:"08", icon:`<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22,12 18,12 15,21 9,3 6,12 2,12"/></svg>`, title:"M3U / Xtream / MAG Stalker", desc:"Compatible avec tous les protocoles : M3U Playlist, Xtream Codes, Portail MAG Stalker.", color:"#6FA0FF", rgb:"111,160,255" },
+  { num:"09", icon:`<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>`, title:"Anti-Freeze Technologie", desc:"Technologie anti-freeze avancée pour une lecture fluide même avec une connexion instable.", color:"#FFC107", rgb:"255,193,7" },
+  { num:"10", icon:`<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13" rx="2"/><polygon points="16,8 21,8 21,14 16,14"/></svg>`, title:"Multi-Écrans Simultanés", desc:"Regardez sur 1, 2 ou 3 écrans simultanément selon votre abonnement. Idéal pour la famille.", color:"#F97316", rgb:"249,115,22" },
+];
+---
+<section id="fonctionnalites" style="position:relative;padding:7rem 0;background:var(--bg);overflow:hidden;">
+
+  <div class="orb" style="width:500px;height:500px;background:radial-gradient(circle,rgba(232,25,44,0.05) 0%,transparent 70%);top:-100px;right:-150px;"></div>
+  <div class="orb" style="width:350px;height:350px;background:radial-gradient(circle,rgba(255,193,7,0.04) 0%,transparent 70%);bottom:0;left:-50px;"></div>
+  <div style="position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent);"></div>
+
+  <div style="max-width:1280px;margin:0 auto;padding:0 1.5rem;position:relative;z-index:1;">
+
+    <!-- Header -->
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:4rem;flex-wrap:wrap;gap:1.5rem;" class="fade-in-up">
+      <div>
+        <span class="section-label lbl-red">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          Fonctionnalités
+        </span>
+        <h2 style="font-family:'Outfit',sans-serif;font-size:clamp(2.2rem,3.8vw,3.2rem);font-weight:800;color:#fff;margin-top:0.75rem;line-height:1.1;">
+          Tout ce que vous <span style="color:var(--accent);">pouvez</span> faire
+        </h2>
+      </div>
+      <p style="font-family:'Barlow',sans-serif;font-size:1rem;color:var(--text-muted);max-width:400px;line-height:1.75;">
+        Tout ce dont vous avez besoin pour une expérience IPTV parfaite — inclus dans chaque abonnement.
+      </p>
+    </div>
+
+    <!-- Features grid — filmbox card style -->
+    <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:1rem;margin-bottom:1rem;" class="features-row-1">
+      {features.slice(0, 5).map((f, i) => (
+        <div
+          class={`fade-in-up delay-${i + 1}`}
+          style={`
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 1.5rem 1.25rem;
+            position: relative;
+            overflow: hidden;
+            cursor: default;
+            transition: all .3s ease;
+          `}
+          onmouseover={`this.style.borderColor='rgba(${f.rgb},0.4)';this.style.transform='translateY(-4px)';this.style.boxShadow='0 16px 40px rgba(${f.rgb},0.12)'`}
+          onmouseout="this.style.borderColor='var(--border)';this.style.transform='translateY(0)';this.style.boxShadow='none'"
+        >
+          <!-- Top color bar -->
+          <div style={`position:absolute;top:0;left:0;right:0;height:2px;background:${f.color};opacity:0.7;`}></div>
+
+          <!-- Number -->
+          <div style={`font-family:'JetBrains Mono',monospace;font-size:0.6rem;font-weight:600;color:${f.color};opacity:0.6;letter-spacing:0.12em;margin-bottom:1rem;`}>{f.num}</div>
+
+          <!-- Icon -->
+          <div style={`width:44px;height:44px;background:rgba(${f.rgb},0.1);border:1px solid rgba(${f.rgb},0.2);border-radius:10px;display:flex;align-items:center;justify-content:center;color:${f.color};margin-bottom:1rem;`}>
+            <Fragment set:html={f.icon} />
+          </div>
+
+          <h3 style="font-family:'Outfit',sans-serif;font-weight:700;font-size:0.85rem;color:#fff;margin-bottom:0.5rem;line-height:1.35;">{f.title}</h3>
+          <p style="font-family:'Barlow',sans-serif;color:var(--text-muted);font-size:0.78rem;line-height:1.65;">{f.desc}</p>
+        </div>
+      ))}
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:1rem;" class="features-row-2">
+      {features.slice(5, 10).map((f, i) => (
+        <div
+          class={`fade-in-up delay-${i + 1}`}
+          style="background:var(--bg-card);border:1px solid var(--border);border-radius:14px;padding:1.5rem 1.25rem;position:relative;overflow:hidden;cursor:default;transition:all .3s ease;"
+          onmouseover={`this.style.borderColor='rgba(${f.rgb},0.4)';this.style.transform='translateY(-4px)';this.style.boxShadow='0 16px 40px rgba(${f.rgb},0.12)'`}
+          onmouseout="this.style.borderColor='var(--border)';this.style.transform='translateY(0)';this.style.boxShadow='none'"
+        >
+          <div style={`position:absolute;top:0;left:0;right:0;height:2px;background:${f.color};opacity:0.7;`}></div>
+          <div style={`font-family:'JetBrains Mono',monospace;font-size:0.6rem;font-weight:600;color:${f.color};opacity:0.6;letter-spacing:0.12em;margin-bottom:1rem;`}>{f.num}</div>
+          <div style={`width:44px;height:44px;background:rgba(${f.rgb},0.1);border:1px solid rgba(${f.rgb},0.2);border-radius:10px;display:flex;align-items:center;justify-content:center;color:${f.color};margin-bottom:1rem;`}>
+            <Fragment set:html={f.icon} />
+          </div>
+          <h3 style="font-family:'Outfit',sans-serif;font-weight:700;font-size:0.85rem;color:#fff;margin-bottom:0.5rem;line-height:1.35;">{f.title}</h3>
+          <p style="font-family:'Barlow',sans-serif;color:var(--text-muted);font-size:0.78rem;line-height:1.65;">{f.desc}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <div style="position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent);"></div>
+</section>
+
+<style>
+  @media (max-width: 1200px) { .features-row-1, .features-row-2 { grid-template-columns: repeat(3, 1fr) !important; } }
+  @media (max-width: 768px)  { .features-row-1, .features-row-2 { grid-template-columns: repeat(2, 1fr) !important; } }
+  @media (max-width: 480px)  { .features-row-1, .features-row-2 { grid-template-columns: 1fr !important; } }
+</style>
+
+<script>
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('#fonctionnalites .fade-in-up').forEach(el => obs.observe(el));
+</script>

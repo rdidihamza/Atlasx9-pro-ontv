@@ -1,0 +1,352 @@
+---
+import { getCollection, getEntry } from 'astro:content';
+import BaseLayout from '../../components/layout/BaseLayout.astro';
+import Navbar from '../../components/layout/Navbar.astro';
+import AnnouncementBar from '../../components/layout/AnnouncementBar.astro';
+import Footer from '../../components/layout/Footer.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map(post => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+
+const canonical = post.data.canonical || `https://atlasproontv.fr/blog/${post.slug}`;
+const ogImage   = post.data.image     || '/images/og-image.webp';
+
+const jsonLdArticle = {
+  "@context": "https://schema.org",
+  "@type": post.data.schema?.type || "Article",
+  "headline": post.data.title,
+  "description": post.data.description,
+  "author": {
+    "@type": "Person",
+    "name": post.data.author || "Atlas Pro ONTV"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Atlas Pro ONTV",
+    "url": "https://atlasproontv.fr",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://atlasproontv.fr/images/logo.webp"
+    }
+  },
+  "datePublished": post.data.date,
+  "dateModified": post.data.dateModified || post.data.date,
+  "url": canonical,
+  "image": ogImage.startsWith('http') ? ogImage : `https://atlasproontv.fr${ogImage}`,
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": canonical
+  }
+};
+
+const readingTime = Math.max(1, Math.ceil(post.body.split(/\s+/).length / 200));
+---
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{post.data.title}</title>
+  <meta name="description" content={post.data.description} />
+  {post.data.noindex ? <meta name="robots" content="noindex,nofollow" /> : <meta name="robots" content="index,follow" />}
+  <link rel="canonical" href={canonical} />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content={canonical} />
+  <meta property="og:title" content={post.data.title} />
+  <meta property="og:description" content={post.data.description} />
+  <meta property="og:image" content={ogImage.startsWith('http') ? ogImage : `https://atlasproontv.fr${ogImage}`} />
+  <meta property="og:locale" content="fr_FR" />
+  <meta property="og:site_name" content="Atlas Pro ONTV" />
+  <meta property="article:published_time" content={post.data.date} />
+  {post.data.dateModified && <meta property="article:modified_time" content={post.data.dateModified} />}
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={post.data.title} />
+  <meta name="twitter:description" content={post.data.description} />
+
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLdArticle)} />
+
+  <style is:global>
+    @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Barlow:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap');
+  </style>
+  <link rel="stylesheet" href="/src/styles/global.css" />
+</head>
+<body>
+  <AnnouncementBar />
+  <Navbar />
+
+  <main style="min-height:100vh;background:var(--bg,#0C0C12);">
+
+    <!-- Hero Banner -->
+    <section style="padding:3rem 0 2rem;background:linear-gradient(180deg,rgba(232,25,44,0.06) 0%,transparent 100%);border-bottom:1px solid var(--border,rgba(255,255,255,0.06));">
+      <div style="max-width:860px;margin:0 auto;padding:0 1.5rem;">
+
+        <!-- Breadcrumb -->
+        <nav style="display:flex;align-items:center;gap:8px;margin-bottom:1.5rem;font-family:'Outfit',sans-serif;font-size:0.75rem;color:var(--text-muted,#8899aa);">
+          <a href="/" style="color:var(--text-muted,#8899aa);text-decoration:none;transition:color .2s;" onmouseover="this.style.color='var(--accent,#E8192C)'" onmouseout="this.style.color='var(--text-muted,#8899aa)'">Accueil</a>
+          <span style="opacity:0.4;">›</span>
+          <a href="/blog" style="color:var(--text-muted,#8899aa);text-decoration:none;transition:color .2s;" onmouseover="this.style.color='var(--accent,#E8192C)'" onmouseout="this.style.color='var(--text-muted,#8899aa)'">Blog</a>
+          <span style="opacity:0.4;">›</span>
+          <span style="color:var(--accent,#E8192C);max-width:300px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">{post.data.title}</span>
+        </nav>
+
+        <!-- Category + Tags -->
+        <div style="display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:1rem;">
+          <span style="padding:4px 12px;background:var(--accent,#E8192C);color:white;font-family:'Outfit',sans-serif;font-size:0.65rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;border-radius:20px;">
+            {post.data.category || 'Guide IPTV'}
+          </span>
+          {post.data.tags?.slice(0, 4).map(tag => (
+            <span style="padding:3px 10px;background:rgba(232,25,44,0.08);border:1px solid rgba(232,25,44,0.2);color:var(--accent,#E8192C);font-family:'Outfit',sans-serif;font-size:0.65rem;font-weight:600;border-radius:20px;">
+              {tag}
+            </span>
+          ))}
+        </div>
+
+        <!-- Title -->
+        <h1 style="font-family:'Outfit',sans-serif;font-size:clamp(1.75rem,4vw,2.75rem);font-weight:900;color:#fff;line-height:1.15;margin-bottom:1rem;">
+          {post.data.title}
+        </h1>
+
+        <!-- Description -->
+        <p style="font-family:'Barlow',sans-serif;font-size:1.05rem;color:var(--text-muted,#8899aa);line-height:1.75;margin-bottom:1.5rem;max-width:700px;">
+          {post.data.description}
+        </p>
+
+        <!-- Meta row -->
+        <div style="display:flex;align-items:center;flex-wrap:wrap;gap:1.5rem;padding:1rem 1.25rem;background:var(--bg-card,rgba(255,255,255,0.03));border:1px solid var(--border,rgba(255,255,255,0.06));border-radius:10px;">
+          <div style="display:flex;align-items:center;gap:8px;">
+            <div style="width:32px;height:32px;border-radius:50%;background:var(--accent,#E8192C);display:flex;align-items:center;justify-content:center;font-family:'Outfit',sans-serif;font-size:0.75rem;font-weight:700;color:white;">
+              {(post.data.author || 'A').charAt(0)}
+            </div>
+            <div>
+              <div style="font-family:'Outfit',sans-serif;font-size:0.78rem;font-weight:600;color:#fff;">{post.data.author || 'Atlas Pro ONTV'}</div>
+              <div style="font-family:'Barlow',sans-serif;font-size:0.68rem;color:var(--text-muted,#8899aa);">Rédacteur IPTV</div>
+            </div>
+          </div>
+
+          <div style="display:flex;align-items:center;gap:6px;color:var(--text-muted,#8899aa);">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            <span style="font-family:'Barlow',sans-serif;font-size:0.78rem;">
+              {new Date(post.data.date).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' })}
+            </span>
+          </div>
+
+          {post.data.dateModified && post.data.dateModified !== post.data.date && (
+            <div style="display:flex;align-items:center;gap:6px;color:var(--text-muted,#8899aa);">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+              <span style="font-family:'Barlow',sans-serif;font-size:0.78rem;">
+                Mis à jour : {new Date(post.data.dateModified).toLocaleDateString('fr-FR', { day: 'numeric', month: 'short', year: 'numeric' })}
+              </span>
+            </div>
+          )}
+
+          <div style="display:flex;align-items:center;gap:6px;color:var(--text-muted,#8899aa);margin-left:auto;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            <span style="font-family:'Barlow',sans-serif;font-size:0.78rem;">{readingTime} min de lecture</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Article Content -->
+    <section style="padding:3rem 0 5rem;">
+      <div style="max-width:860px;margin:0 auto;padding:0 1.5rem;display:grid;grid-template-columns:1fr;gap:3rem;">
+
+        <!-- Main content -->
+        <article class="blog-content">
+          <Content />
+        </article>
+
+        <!-- CTA Box -->
+        <div style="padding:2rem;background:rgba(232,25,44,0.05);border:1px solid rgba(232,25,44,0.2);border-radius:14px;text-align:center;">
+          <div style="font-family:'Outfit',sans-serif;font-size:0.7rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent,#E8192C);margin-bottom:0.75rem;">Atlas Pro ONTV</div>
+          <h3 style="font-family:'Outfit',sans-serif;font-size:1.5rem;font-weight:800;color:#fff;margin-bottom:0.5rem;">
+            Essayez Atlas Pro ONTV gratuitement
+          </h3>
+          <p style="font-family:'Barlow',sans-serif;font-size:0.9rem;color:var(--text-muted,#8899aa);margin-bottom:1.25rem;max-width:420px;margin-left:auto;margin-right:auto;">
+            Test gratuit 24h sans engagement — +15 000 chaînes HD/4K, +70 000 VOD, support WhatsApp 24h/7j.
+          </p>
+          <div style="display:flex;gap:0.75rem;justify-content:center;flex-wrap:wrap;">
+            <a
+              href="https://wa.me/33XXXXXXXXX?text=Bonjour%2C+je+voudrais+un+test+gratuit+24h+Atlas+Pro+ONTV"
+              target="_blank"
+              rel="noopener"
+              style="display:inline-flex;align-items:center;gap:8px;padding:11px 24px;background:var(--accent,#E8192C);color:white;font-family:'Outfit',sans-serif;font-weight:700;font-size:0.85rem;border-radius:8px;text-decoration:none;"
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              Test Gratuit 24h
+            </a>
+            <a
+              href="/#abonnement"
+              style="display:inline-flex;align-items:center;gap:8px;padding:11px 24px;background:transparent;color:#fff;font-family:'Outfit',sans-serif;font-weight:600;font-size:0.85rem;border:1px solid rgba(255,255,255,0.15);border-radius:8px;text-decoration:none;"
+            >
+              Voir les tarifs →
+            </a>
+          </div>
+        </div>
+
+        <!-- Back to blog -->
+        <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;padding-top:1.5rem;border-top:1px solid var(--border,rgba(255,255,255,0.06));">
+          <a
+            href="/blog"
+            style="display:inline-flex;align-items:center;gap:8px;font-family:'Outfit',sans-serif;font-size:0.85rem;font-weight:600;color:var(--text-muted,#8899aa);text-decoration:none;transition:color .2s;"
+            onmouseover="this.style.color='var(--accent,#E8192C)'"
+            onmouseout="this.style.color='var(--text-muted,#8899aa)'"
+          >
+            ← Retour au blog
+          </a>
+          <div style="display:flex;align-items:center;gap:0.5rem;">
+            {post.data.tags?.slice(0, 3).map(tag => (
+              <span style="padding:3px 10px;background:var(--bg-card,rgba(255,255,255,0.03));border:1px solid var(--border,rgba(255,255,255,0.06));border-radius:12px;font-family:'Outfit',sans-serif;font-size:0.65rem;font-weight:600;color:var(--text-muted,#8899aa);">
+                {tag}
+              </span>
+            ))}
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <Footer />
+
+  <!-- Blog content styles -->
+  <style is:global>
+    .blog-content {
+      font-family: 'Barlow', sans-serif;
+      font-size: 1rem;
+      color: #c8d4e0;
+      line-height: 1.85;
+    }
+
+    .blog-content h1,
+    .blog-content h2,
+    .blog-content h3,
+    .blog-content h4 {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.25;
+      margin-top: 2.5rem;
+      margin-bottom: 0.875rem;
+    }
+
+    .blog-content h1 { font-size: clamp(1.75rem, 3vw, 2.25rem); }
+    .blog-content h2 { font-size: clamp(1.3rem, 2.5vw, 1.75rem); border-bottom: 1px solid rgba(232,25,44,0.2); padding-bottom: 0.5rem; }
+    .blog-content h3 { font-size: 1.15rem; color: rgba(255,255,255,0.9); }
+    .blog-content h4 { font-size: 1rem; color: rgba(255,255,255,0.8); }
+
+    .blog-content p { margin-bottom: 1.25rem; }
+
+    .blog-content a {
+      color: #E8192C;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      text-decoration-color: rgba(232,25,44,0.4);
+      transition: text-decoration-color .2s;
+    }
+    .blog-content a:hover { text-decoration-color: #E8192C; }
+
+    .blog-content strong { color: #fff; font-weight: 700; }
+    .blog-content em { color: rgba(255,255,255,0.8); }
+
+    .blog-content ul,
+    .blog-content ol {
+      padding-left: 1.5rem;
+      margin-bottom: 1.25rem;
+    }
+    .blog-content li { margin-bottom: 0.4rem; }
+    .blog-content ul li::marker { color: #E8192C; }
+
+    .blog-content blockquote {
+      border-left: 3px solid #E8192C;
+      padding: 0.75rem 1.25rem;
+      background: rgba(232,25,44,0.05);
+      border-radius: 0 8px 8px 0;
+      margin: 1.5rem 0;
+      font-style: italic;
+      color: rgba(255,255,255,0.75);
+    }
+
+    .blog-content code {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 4px;
+      padding: 2px 7px;
+      font-size: 0.875em;
+      color: #E8192C;
+      font-family: 'Fira Code', 'Consolas', monospace;
+    }
+
+    .blog-content pre {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 8px;
+      padding: 1.25rem;
+      overflow-x: auto;
+      margin: 1.5rem 0;
+    }
+    .blog-content pre code {
+      background: none;
+      border: none;
+      padding: 0;
+      color: #c8d4e0;
+    }
+
+    .blog-content table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      font-size: 0.9rem;
+    }
+    .blog-content th {
+      background: rgba(232,25,44,0.1);
+      color: #fff;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 700;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.75rem 1rem;
+      text-align: left;
+      border-bottom: 1px solid rgba(232,25,44,0.3);
+    }
+    .blog-content td {
+      padding: 0.65rem 1rem;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .blog-content tr:last-child td { border-bottom: none; }
+    .blog-content tr:hover td { background: rgba(255,255,255,0.02); }
+
+    .blog-content hr {
+      border: none;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      margin: 2rem 0;
+    }
+
+    .blog-content img {
+      max-width: 100%;
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.06);
+      margin: 1.5rem 0;
+    }
+  </style>
+
+</body>
+</html>

@@ -1,0 +1,153 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../components/layout/BaseLayout.astro';
+import Navbar from '../../components/layout/Navbar.astro';
+import AnnouncementBar from '../../components/layout/AnnouncementBar.astro';
+import Footer from '../../components/layout/Footer.astro';
+
+const allPosts = await getCollection('blog');
+const posts = allPosts
+  .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+
+const title       = "Blog IPTV France 2026 — Guides, Tests & Comparatifs | Atlas Pro ONTV";
+const description = "Guides complets, tutoriels d'installation, comparatifs et tests IPTV France. Tout savoir sur Atlas Pro ONTV, Firestick, Smart TV et VOD 4K.";
+---
+
+<BaseLayout title={title} description={description} canonical="https://atlasproontv.fr/blog">
+  <AnnouncementBar />
+  <Navbar />
+  <main>
+    <section style="min-height:100vh;padding:5rem 0;background:var(--bg);position:relative;overflow:hidden;">
+
+      <!-- Background -->
+      <div style="position:absolute;width:600px;height:400px;background:radial-gradient(ellipse,rgba(232,25,44,0.07) 0%,transparent 70%);top:0;left:50%;transform:translateX(-50%);pointer-events:none;border-radius:50%;"></div>
+      <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(232,25,44,.018) 1px,transparent 1px),linear-gradient(90deg,rgba(232,25,44,.018) 1px,transparent 1px);background-size:64px 64px;pointer-events:none;"></div>
+
+      <div style="max-width:1200px;margin:0 auto;padding:0 1.5rem;position:relative;z-index:1;">
+
+        <!-- Header -->
+        <div style="text-align:center;margin-bottom:4rem;">
+          <span style="display:inline-flex;align-items:center;gap:8px;padding:5px 14px;border-radius:20px;background:var(--accent-dim);border:1px solid var(--border-accent);font-family:'Outfit',sans-serif;font-size:0.68rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent);margin-bottom:1.25rem;">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/></svg>
+            Blog & Guides
+          </span>
+          <h1 style="font-family:'Outfit',sans-serif;font-size:clamp(2.2rem,4vw,3.5rem);font-weight:900;color:#fff;line-height:1.1;margin-bottom:1rem;">
+            Guides IPTV France <span style="color:var(--accent);">2026</span>
+          </h1>
+          <p style="font-family:'Barlow',sans-serif;font-size:1.05rem;color:var(--text-muted);max-width:580px;margin:0 auto;line-height:1.8;">
+            Tutoriels d'installation, comparatifs, tests et guides complets pour tout savoir sur l'IPTV en France.
+          </p>
+
+          <!-- Stats pills -->
+          <div style="display:flex;flex-wrap:wrap;gap:1rem;justify-content:center;margin-top:2rem;">
+            {[
+              { num: posts.length, label: 'Articles' },
+              { num: '+15K',       label: 'Chaînes' },
+              { num: '+70K',       label: 'VOD' },
+            ].map(s => (
+              <div style="padding:8px 20px;background:var(--bg-card);border:1px solid var(--border);border-radius:50px;display:flex;align-items:center;gap:8px;">
+                <span style="font-family:'Outfit',sans-serif;font-weight:800;font-size:1.1rem;color:var(--accent);">{s.num}</span>
+                <span style="font-family:'Outfit',sans-serif;font-size:0.75rem;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.06em;">{s.label}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <!-- Post Grid -->
+        {posts.length === 0 ? (
+          <div style="text-align:center;padding:5rem 2rem;color:var(--text-muted);">
+            <p style="font-family:'Outfit',sans-serif;font-size:1.1rem;">Les articles sont en cours de génération...</p>
+            <p style="font-family:'Barlow',sans-serif;font-size:0.9rem;margin-top:0.5rem;">Lancez <code style="background:var(--bg-card);padding:2px 8px;border-radius:4px;color:var(--accent);">npm run seo:seed</code> pour générer tous les articles.</p>
+          </div>
+        ) : (
+          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:1.5rem;">
+            {posts.map((post, i) => (
+              <article
+                style={`
+                  background: var(--bg-card);
+                  border: 1px solid var(--border);
+                  border-radius: 14px;
+                  overflow: hidden;
+                  transition: all .3s ease;
+                  display: flex;
+                  flex-direction: column;
+                  ${i === 0 ? 'border-color: rgba(232,25,44,0.3);' : ''}
+                `}
+                onmouseover="this.style.borderColor='rgba(232,25,44,0.4)';this.style.transform='translateY(-3px)';this.style.boxShadow='0 16px 40px rgba(232,25,44,0.1)'"
+                onmouseout={`this.style.borderColor='${i === 0 ? 'rgba(232,25,44,0.3)' : 'var(--border)'}';this.style.transform='translateY(0)';this.style.boxShadow='none'`}
+              >
+                <!-- Article image placeholder -->
+                <div style={`height:160px;background:linear-gradient(135deg,rgba(232,25,44,0.15),rgba(232,25,44,0.03));border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;`}>
+                  <div style="font-size:3rem;opacity:0.3;">📺</div>
+                  <!-- Category pill -->
+                  <div style="position:absolute;top:12px;left:12px;background:var(--accent);color:white;font-family:'Outfit',sans-serif;font-size:0.6rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:3px 10px;border-radius:20px;">
+                    {post.data.category || 'Guide IPTV'}
+                  </div>
+                  {i === 0 && (
+                    <div style="position:absolute;top:12px;right:12px;background:rgba(255,193,7,0.2);border:1px solid rgba(255,193,7,0.4);color:#FFC107;font-family:'Outfit',sans-serif;font-size:0.6rem;font-weight:700;letter-spacing:0.08em;padding:3px 10px;border-radius:20px;">
+                      ★ Dernier
+                    </div>
+                  )}
+                </div>
+
+                <!-- Content -->
+                <div style="padding:1.5rem;flex:1;display:flex;flex-direction:column;gap:0.75rem;">
+                  <h2 style="font-family:'Outfit',sans-serif;font-weight:700;font-size:1rem;color:#fff;line-height:1.35;">
+                    <a href={`/blog/${post.slug}`} style="text-decoration:none;color:inherit;">
+                      {post.data.title}
+                    </a>
+                  </h2>
+                  <p style="font-family:'Barlow',sans-serif;font-size:0.85rem;color:var(--text-muted);line-height:1.65;flex:1;">
+                    {post.data.description}
+                  </p>
+
+                  <!-- Tags -->
+                  {post.data.tags?.slice(0,3).map(tag => (
+                    <span style="display:inline-block;padding:2px 8px;background:var(--accent-dim);border:1px solid var(--border-accent);border-radius:12px;font-family:'Outfit',sans-serif;font-size:0.62rem;font-weight:600;color:var(--accent);margin-right:4px;">
+                      {tag}
+                    </span>
+                  ))}
+
+                  <!-- Footer -->
+                  <div style="display:flex;align-items:center;justify-content:space-between;padding-top:0.75rem;border-top:1px solid var(--border);">
+                    <span style="font-family:'Barlow',sans-serif;font-size:0.75rem;color:var(--text-muted);">
+                      {new Date(post.data.date).toLocaleDateString('fr-FR', { day:'numeric', month:'short', year:'numeric' })}
+                    </span>
+                    <a
+                      href={`/blog/${post.slug}`}
+                      style="font-family:'Outfit',sans-serif;font-size:0.78rem;font-weight:700;color:var(--accent);text-decoration:none;display:flex;align-items:center;gap:4px;transition:gap .2s;"
+                      onmouseover="this.style.gap='8px'"
+                      onmouseout="this.style.gap='4px'"
+                    >
+                      Lire l'article →
+                    </a>
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+        )}
+
+        <!-- CTA banner -->
+        <div style="margin-top:4rem;padding:2.5rem;background:rgba(232,25,44,0.06);border:1px solid rgba(232,25,44,0.2);border-radius:16px;text-align:center;">
+          <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:1.75rem;color:#fff;margin-bottom:0.75rem;">
+            Prêt à tester Atlas Pro ONTV ?
+          </h2>
+          <p style="font-family:'Barlow',sans-serif;font-size:0.95rem;color:var(--text-muted);margin-bottom:1.5rem;">
+            Essai gratuit 24h — sans carte bancaire, sans engagement.
+          </p>
+          <a
+            href="https://wa.me/33XXXXXXXXX?text=Bonjour%2C+je+voudrais+un+test+gratuit+24h+Atlas+Pro+ONTV"
+            target="_blank"
+            rel="noopener"
+            style="display:inline-flex;align-items:center;gap:10px;padding:13px 28px;background:var(--accent);color:white;font-family:'Outfit',sans-serif;font-weight:700;font-size:0.9rem;border-radius:8px;text-decoration:none;"
+          >
+            Test Gratuit 24h
+          </a>
+        </div>
+
+      </div>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>

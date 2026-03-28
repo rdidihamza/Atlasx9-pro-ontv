@@ -1,0 +1,553 @@
+---
+import BaseLayout from '../components/layout/BaseLayout.astro';
+import AnnouncementBar from '../components/layout/AnnouncementBar.astro';
+import Navbar from '../components/layout/Navbar.astro';
+import Footer from '../components/layout/Footer.astro';
+import { CUSTOMER_REVIEWS, AGGREGATE_RATING } from '../data/reviews';
+
+const WA_LINK = "https://wa.me/33XXXXXXXXX?text=Bonjour%2C+je+voudrais+tester+Atlas+Pro+ONTV+24h";
+
+const sportCards = [
+  { title: 'Ligue 1', icon: '⚽', badge: 'Live' },
+  { title: 'Champions League', icon: '🏆', badge: 'Live' },
+  { title: 'Premier League', icon: '⚽', badge: 'Live' },
+  { title: 'Coupe du Monde 2026', icon: '🌍', badge: 'Live' },
+  { title: 'beIN Sports', icon: '📺', badge: 'Inclus' },
+  { title: 'RMC Sport', icon: '📻', badge: 'Inclus' },
+  { title: 'Formula 1', icon: '🏎️', badge: 'Live' },
+  { title: 'Roland Garros', icon: '🎾', badge: 'Live' },
+];
+
+const devices = [
+  { label: 'Firestick', icon: '🔥' },
+  { label: 'Android', icon: '🤖' },
+  { label: 'Smart TV', icon: '📺' },
+  { label: 'iPhone', icon: '📱' },
+  { label: 'MAG', icon: '📡' },
+  { label: 'PC / Mac', icon: '💻' },
+  { label: 'Apple TV', icon: '🍎' },
+];
+
+const categories = [
+  { title: 'Chaînes Françaises', sub: 'TF1, M6, France TV, Arte, C8...', icon: '🇫🇷', count: '+200', color: '#6FA0FF' },
+  { title: 'Sport', sub: 'Ligue 1, Champions League, F1...', icon: '⚽', count: '+500', color: '#E8192C' },
+  { title: 'Chaînes Arabes & Maghreb', sub: 'MBC, Al Jazeera, Rotana, Nile...', icon: '🌙', count: '+1 000', color: '#FFC107' },
+  { title: 'Films & Séries VOD', sub: 'Dernières sorties, 4K UHD...', icon: '🎬', count: '+70 000', color: '#22C55E' },
+  { title: 'Enfants & Famille', sub: 'Disney, Nickelodeon, Gulli...', icon: '🧒', count: '+80', color: '#F97316' },
+  { title: 'International', sub: 'UK, USA, Afrique, Turquie...', icon: '🌍', count: '+5 000', color: '#22D3EE' },
+];
+
+const threeReviews = CUSTOMER_REVIEWS.slice(0, 3);
+const avatarColors = ['#E8192C', '#FFC107', '#22C55E'];
+
+const faqItems = [
+  {
+    q: 'Puis-je essayer avant d\'acheter ?',
+    a: 'Oui ! Nous offrons un essai gratuit de 24h sans carte bancaire. Contactez-nous sur WhatsApp et recevez vos accès en moins de 5 minutes.'
+  },
+  {
+    q: 'Quel est le prix ?',
+    a: 'L\'abonnement démarre à 39,99 €/an soit seulement 3,33 €/mois. Nous proposons aussi des formules 3 mois et 6 mois. Remboursement 30 jours garanti si vous n\'êtes pas satisfait.'
+  },
+  {
+    q: 'Sur quels appareils ça marche ?',
+    a: 'Atlas Pro ONTV fonctionne sur tous les appareils : Amazon Firestick, Smart TV Samsung/LG, Android, iPhone/iPad, Apple TV, MAG et PC/Mac. Une seule connexion pour tous vos écrans.'
+  },
+  {
+    q: 'Combien de chaînes et est-ce que ça inclut le sport ?',
+    a: 'Oui, +15 000 chaînes dont beIN Sports 1-7, RMC Sport 1-3, Canal+ Sport, Eurosport, Ligue 1, Champions League, Premier League — tout inclus sans supplément.'
+  },
+  {
+    q: 'Comment commander ?',
+    a: 'Envoyez-nous un message sur WhatsApp. Nous configurons votre abonnement et vous recevez vos identifiants en moins de 5 minutes. Paiement sécurisé par PayPal ou virement.'
+  },
+];
+---
+
+<BaseLayout
+  title="Atlas Pro ONTV — N°1 Abonnement IPTV France | +15 000 Chaînes HD/4K | Coupe du Monde 2026"
+  description="Atlas Pro ONTV : N°1 abonnement IPTV en France. +15 000 chaînes HD/4K, +70 000 VOD, Coupe du Monde 2026 en direct. Dès 3,33 €/mois. Essai gratuit 24h. Support WhatsApp 24h/7j."
+  canonical="https://atlasproontv.fr"
+>
+  <AnnouncementBar />
+  <Navbar />
+  <main>
+
+    <!-- ══════════════════════════════════════════
+         SECTION 1: HERO
+    ══════════════════════════════════════════ -->
+    <section id="accueil" style="position:relative;min-height:100vh;display:flex;align-items:center;overflow:hidden;background:var(--bg);">
+      <!-- Background glow -->
+      <div style="position:absolute;width:800px;height:800px;background:radial-gradient(circle,rgba(232,25,44,0.18) 0%,rgba(232,25,44,0.06) 40%,transparent 70%);border-radius:50%;right:-200px;top:50%;transform:translateY(-50%);pointer-events:none;"></div>
+      <div style="position:absolute;width:500px;height:500px;background:radial-gradient(circle,rgba(232,25,44,0.08) 0%,transparent 70%);border-radius:50%;left:10%;bottom:-150px;pointer-events:none;"></div>
+      <!-- Grid overlay -->
+      <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(232,25,44,.015) 1px,transparent 1px),linear-gradient(90deg,rgba(232,25,44,.015) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;"></div>
+
+      <div style="max-width:1280px;margin:0 auto;padding:7rem 2rem 5rem;width:100%;position:relative;z-index:1;">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;" class="hero-grid">
+
+          <!-- Left -->
+          <div>
+            <div style="display:inline-flex;align-items:center;gap:8px;padding:6px 14px;background:rgba(232,25,44,0.12);border:1px solid rgba(232,25,44,0.3);border-radius:20px;margin-bottom:1.5rem;">
+              <span style="width:7px;height:7px;background:var(--accent);border-radius:50%;animation:pulse-red 1.5s ease-in-out infinite;"></span>
+              <span style="font-family:'Outfit',sans-serif;font-size:0.7rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--accent);">N°1 IPTV en France</span>
+            </div>
+
+            <h1 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(2.8rem,5.5vw,5rem);line-height:1.0;color:#fff;margin-bottom:1.25rem;letter-spacing:-0.02em;">
+              N°1 Abonnement<br/>
+              <span style="color:var(--accent);">IPTV en France</span>
+            </h1>
+
+            <p style="font-family:'Barlow',sans-serif;font-size:1.1rem;color:var(--text-muted);line-height:1.7;margin-bottom:0.75rem;max-width:500px;">
+              <strong style="color:#fff;">+15 000 chaînes HD/4K</strong> · <strong style="color:#fff;">+70 000 VOD</strong> · <strong style="color:var(--accent);">Coupe du Monde 2026 en direct</strong>
+            </p>
+
+            <!-- Stars rating -->
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:2rem;">
+              <span style="color:var(--gold);font-size:1rem;letter-spacing:2px;">★★★★★</span>
+              <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:0.9rem;color:var(--gold);">4.8/5</span>
+              <span style="font-family:'Barlow',sans-serif;font-size:0.85rem;color:var(--text-muted);">— 50 000+ clients satisfaits</span>
+            </div>
+
+            <!-- CTAs -->
+            <div style="display:flex;flex-wrap:wrap;gap:12px;margin-bottom:2rem;">
+              <a
+                href={WA_LINK}
+                target="_blank" rel="noopener"
+                style="display:inline-flex;align-items:center;gap:10px;padding:14px 28px;background:var(--accent);color:white;font-family:'Outfit',sans-serif;font-weight:700;font-size:0.95rem;border-radius:10px;text-decoration:none;transition:all .25s ease;"
+                onmouseover="this.style.background='#FF2D40';this.style.transform='translateY(-2px)'"
+                onmouseout="this.style.background='var(--accent)';this.style.transform='translateY(0)'"
+              >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M12 0C5.374 0 0 5.373 0 12c0 2.117.549 4.099 1.508 5.817L.057 23.887a.5.5 0 0 0 .556.556l6.07-1.451C8.362 23.658 10.118 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm5.53 17.12c-.272.767-1.571 1.462-2.147 1.524-.549.058-1.25.084-2.015-.124-.464-.13-1.059-.302-1.825-.631-3.21-1.387-5.3-4.626-5.462-4.839-.163-.214-1.329-1.768-1.329-3.374 0-1.604.839-2.392 1.137-2.718.271-.296.591-.37.789-.37.197 0 .394.002.566.01.182.008.426-.069.667.509.251.599.853 2.083.927 2.234.075.152.124.33.025.532-.099.2-.149.327-.296.503-.148.175-.311.392-.444.527-.148.148-.302.31-.13.607.173.297.769 1.268 1.651 2.053 1.133 1.011 2.089 1.325 2.386 1.473.297.148.47.124.643-.074.173-.198.74-.863 1.038-1.16.198-.198.397-.149.668.025.272.173 1.727.815 2.024.964.297.149.495.223.568.347.074.124.074.718-.198 1.485z"/></svg>
+                Essai Gratuit 24h
+              </a>
+              <a
+                href="/abonnements"
+                style="display:inline-flex;align-items:center;gap:8px;padding:14px 28px;background:transparent;color:white;font-family:'Outfit',sans-serif;font-weight:600;font-size:0.95rem;border-radius:10px;text-decoration:none;border:1px solid rgba(255,255,255,0.2);transition:all .25s ease;"
+                onmouseover="this.style.borderColor='rgba(255,255,255,0.5)';this.style.background='rgba(255,255,255,0.06)'"
+                onmouseout="this.style.borderColor='rgba(255,255,255,0.2)';this.style.background='transparent'"
+              >
+                Voir les offres →
+              </a>
+            </div>
+
+            <!-- Trust badges -->
+            <div style="display:flex;flex-wrap:wrap;gap:1rem;">
+              {['Livraison < 5 min','Remboursement 30j','99,9% Uptime','Support 24h/7j'].map(t => (
+                <span style="display:flex;align-items:center;gap:5px;font-family:'Barlow',sans-serif;font-size:0.8rem;color:var(--text-muted);">
+                  <span style="color:var(--green);font-weight:700;">✓</span>{t}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          <!-- Right: floating stat cards -->
+          <div class="hide-mobile" style="display:flex;flex-direction:column;gap:12px;align-items:flex-end;">
+            {[
+              { num: '+15 000', label: 'Chaînes en Direct', color: '#E8192C', icon: '📺' },
+              { num: '+70 000', label: 'Films & Séries VOD', color: '#FFC107', icon: '🎬' },
+              { num: '99,9%',   label: 'Garantie Uptime',    color: '#22C55E', icon: '⚡' },
+              { num: '50K+',    label: 'Abonnés Satisfaits', color: '#6FA0FF', icon: '⭐' },
+            ].map(s => (
+              <div style={`background:rgba(22,22,30,0.92);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,0.08);border-left:3px solid ${s.color};border-radius:12px;padding:14px 20px;display:flex;align-items:center;gap:14px;min-width:230px;`}>
+                <span style="font-size:1.3rem;">{s.icon}</span>
+                <div>
+                  <div style={`font-family:'Outfit',sans-serif;font-weight:800;font-size:1.5rem;color:${s.color};line-height:1;`}>{s.num}</div>
+                  <div style="font-family:'Barlow',sans-serif;font-size:0.78rem;color:var(--text-muted);margin-top:2px;">{s.label}</div>
+                </div>
+              </div>
+            ))}
+            <div style="background:rgba(249,115,22,0.1);border:1px solid rgba(249,115,22,0.3);border-radius:12px;padding:12px 18px;display:flex;align-items:center;gap:10px;min-width:230px;">
+              <span style="font-size:1.1rem;">⚽</span>
+              <div>
+                <div style="font-family:'Outfit',sans-serif;font-weight:700;font-size:0.78rem;color:#F97316;">Coupe du Monde 2026</div>
+                <div style="font-family:'Barlow',sans-serif;font-size:0.72rem;color:var(--text-muted);">Tous les matchs en direct</div>
+              </div>
+              <span style="width:7px;height:7px;background:#F97316;border-radius:50%;animation:pulse-orange 1.5s ease-in-out infinite;flex-shrink:0;margin-left:auto;"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         SECTION 2: TRUST NUMBERS BAR
+    ══════════════════════════════════════════ -->
+    <section style="background:rgba(22,22,30,0.8);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:1.5rem 0;">
+      <div style="max-width:1280px;margin:0 auto;padding:0 2rem;">
+        <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:1rem;">
+          {[
+            { val: '+15 000', label: 'Chaînes', color: '#E8192C' },
+            { val: '+70 000', label: 'VOD',     color: '#FFC107' },
+            { val: '99,9%',   label: 'Uptime',  color: '#22C55E' },
+            { val: '3,33 €',  label: '/mois',   color: '#6FA0FF' },
+          ].map(p => (
+            <div style={`display:flex;align-items:center;gap:10px;padding:10px 24px;background:var(--bg-card);border:1px solid var(--border);border-radius:50px;`}>
+              <span style={`font-family:'Outfit',sans-serif;font-weight:800;font-size:1.1rem;color:${p.color};`}>{p.val}</span>
+              <span style="font-family:'Barlow',sans-serif;font-size:0.85rem;color:var(--text-muted);">{p.label}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         SECTION 3: PRICE COMPARISON TABLE
+    ══════════════════════════════════════════ -->
+    <section style="position:relative;padding:6rem 0;background:var(--bg-section);overflow:hidden;">
+      <div style="position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent);"></div>
+      <div style="max-width:1280px;margin:0 auto;padding:0 2rem;position:relative;z-index:1;">
+
+        <div style="text-align:center;margin-bottom:3rem;">
+          <span style="display:inline-flex;align-items:center;gap:6px;padding:5px 14px;background:rgba(232,25,44,0.1);border:1px solid rgba(232,25,44,0.25);border-radius:20px;font-family:'Outfit',sans-serif;font-size:0.7rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem;">Comparatif Prix</span>
+          <h2 style="font-family:'Outfit',sans-serif;font-size:clamp(2rem,3.5vw,3rem);font-weight:800;color:#fff;line-height:1.1;">
+            12× moins cher que <span style="color:var(--accent);">Canal+</span>
+          </h2>
+          <p style="font-family:'Barlow',sans-serif;color:var(--text-muted);font-size:1rem;margin-top:0.75rem;">Même contenu, prix radicalement différent.</p>
+        </div>
+
+        <div style="overflow-x:auto;">
+          <table style="width:100%;border-collapse:collapse;min-width:700px;">
+            <thead>
+              <tr style="border-bottom:2px solid var(--border);">
+                <th style="font-family:'Outfit',sans-serif;font-size:0.8rem;font-weight:700;color:var(--text-muted);text-align:left;padding:12px 16px;letter-spacing:0.08em;text-transform:uppercase;">Service</th>
+                <th style="font-family:'Outfit',sans-serif;font-size:0.8rem;font-weight:700;color:var(--text-muted);text-align:center;padding:12px 16px;letter-spacing:0.08em;text-transform:uppercase;">Prix/mois</th>
+                <th style="font-family:'Outfit',sans-serif;font-size:0.8rem;font-weight:700;color:var(--text-muted);text-align:center;padding:12px 16px;letter-spacing:0.08em;text-transform:uppercase;">Chaînes</th>
+                <th style="font-family:'Outfit',sans-serif;font-size:0.8rem;font-weight:700;color:var(--text-muted);text-align:center;padding:12px 16px;letter-spacing:0.08em;text-transform:uppercase;">VOD</th>
+                <th style="font-family:'Outfit',sans-serif;font-size:0.8rem;font-weight:700;color:var(--text-muted);text-align:center;padding:12px 16px;letter-spacing:0.08em;text-transform:uppercase;">Sport</th>
+                <th style="font-family:'Outfit',sans-serif;font-size:0.8rem;font-weight:700;color:var(--text-muted);text-align:center;padding:12px 16px;letter-spacing:0.08em;text-transform:uppercase;">Support</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Atlas Pro row (highlighted) -->
+              <tr style="background:rgba(232,25,44,0.08);border:1px solid rgba(232,25,44,0.3);border-radius:10px;position:relative;">
+                <td style="padding:18px 16px;border-bottom:1px solid rgba(232,25,44,0.15);">
+                  <div style="display:flex;align-items:center;gap:10px;">
+                    <div style="width:32px;height:32px;background:var(--accent);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect x="2" y="3" width="20" height="14" rx="2" fill="white"/><circle cx="12" cy="10" r="3" fill="#E8192C"/></svg>
+                    </div>
+                    <div>
+                      <div style="font-family:'Outfit',sans-serif;font-weight:800;font-size:0.95rem;color:#fff;">Atlas Pro ONTV</div>
+                      <span style="font-family:'Outfit',sans-serif;font-size:0.65rem;font-weight:700;background:var(--accent);color:white;padding:2px 8px;border-radius:10px;letter-spacing:0.08em;">MEILLEUR RAPPORT</span>
+                    </div>
+                  </div>
+                </td>
+                <td style="padding:18px 16px;border-bottom:1px solid rgba(232,25,44,0.15);text-align:center;">
+                  <span style="font-family:'Outfit',sans-serif;font-weight:900;font-size:1.3rem;color:var(--accent);">3,33 €</span>
+                </td>
+                <td style="padding:18px 16px;border-bottom:1px solid rgba(232,25,44,0.15);text-align:center;font-family:'Outfit',sans-serif;font-weight:700;color:#fff;">+15 000 ✅</td>
+                <td style="padding:18px 16px;border-bottom:1px solid rgba(232,25,44,0.15);text-align:center;font-family:'Outfit',sans-serif;font-weight:700;color:#fff;">+70 000 ✅</td>
+                <td style="padding:18px 16px;border-bottom:1px solid rgba(232,25,44,0.15);text-align:center;font-family:'Outfit',sans-serif;font-weight:700;color:var(--green);">✅ Tout inclus</td>
+                <td style="padding:18px 16px;border-bottom:1px solid rgba(232,25,44,0.15);text-align:center;font-family:'Barlow',sans-serif;font-size:0.85rem;color:var(--green);">WhatsApp 24h</td>
+              </tr>
+              <!-- Others -->
+              {[
+                { name: 'Canal+', price: '~40 €', channels: '~200', vod: 'Oui', sport: 'Partiel', support: 'Standard' },
+                { name: 'Netflix', price: '~18 €', channels: '❌', vod: '✅', sport: '❌', support: 'Standard' },
+                { name: 'beIN Sports', price: '~15 €', channels: 'Sport seul', vod: '❌', sport: '✅', support: 'Standard' },
+              ].map(row => (
+                <tr style="border-bottom:1px solid var(--border);">
+                  <td style="padding:16px;font-family:'Outfit',sans-serif;font-weight:600;font-size:0.9rem;color:var(--text-muted);">{row.name}</td>
+                  <td style="padding:16px;text-align:center;font-family:'Outfit',sans-serif;font-weight:700;color:var(--text-muted);">{row.price}</td>
+                  <td style="padding:16px;text-align:center;font-family:'Barlow',sans-serif;font-size:0.85rem;color:var(--text-muted);">{row.channels}</td>
+                  <td style="padding:16px;text-align:center;font-family:'Barlow',sans-serif;font-size:0.85rem;color:var(--text-muted);">{row.vod}</td>
+                  <td style="padding:16px;text-align:center;font-family:'Barlow',sans-serif;font-size:0.85rem;color:var(--text-muted);">{row.sport}</td>
+                  <td style="padding:16px;text-align:center;font-family:'Barlow',sans-serif;font-size:0.85rem;color:var(--text-muted);">{row.support}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div style="position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent);"></div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         SECTION 4: SPORTS — EMOTIONAL TRIGGER
+    ══════════════════════════════════════════ -->
+    <section style="position:relative;padding:6rem 0;background:var(--bg);overflow:hidden;">
+      <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(232,25,44,0.08) 0%,transparent 60%);pointer-events:none;"></div>
+      <div style="position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent);"></div>
+
+      <div style="max-width:1280px;margin:0 auto;padding:0 2rem;position:relative;z-index:1;">
+        <div style="text-align:center;margin-bottom:3rem;">
+          <h2 style="font-family:'Outfit',sans-serif;font-size:clamp(2rem,3.5vw,3rem);font-weight:800;line-height:1.1;">
+            <span style="color:var(--accent);">Tous les matchs</span> en direct
+          </h2>
+          <p style="font-family:'Barlow',sans-serif;color:var(--text-muted);font-size:1rem;margin-top:0.75rem;">
+            beIN Sports 1-7 · RMC Sport 1-3 · Canal+ Sport · Eurosport — Tout inclus dans votre abonnement
+          </p>
+        </div>
+
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;" class="sports-grid">
+          {sportCards.map(card => (
+            <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:1.5rem 1rem;text-align:center;position:relative;transition:all .3s ease;"
+              onmouseover="this.style.borderColor='rgba(232,25,44,0.35)';this.style.transform='translateY(-3px)'"
+              onmouseout="this.style.borderColor='var(--border)';this.style.transform='translateY(0)'"
+            >
+              <div style="font-size:2rem;margin-bottom:0.75rem;">{card.icon}</div>
+              <div style="font-family:'Outfit',sans-serif;font-weight:700;font-size:0.9rem;color:#fff;margin-bottom:0.5rem;">{card.title}</div>
+              <span style="font-family:'Outfit',sans-serif;font-size:0.65rem;font-weight:700;background:var(--accent);color:white;padding:2px 8px;border-radius:10px;letter-spacing:0.08em;">{card.badge}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+      <div style="position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent);"></div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         SECTION 5: HOW TO ORDER — 3 STEPS
+    ══════════════════════════════════════════ -->
+    <section style="position:relative;padding:6rem 0;background:var(--bg-section);overflow:hidden;">
+      <div style="position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent);"></div>
+      <div style="max-width:1280px;margin:0 auto;padding:0 2rem;position:relative;z-index:1;">
+
+        <div style="text-align:center;margin-bottom:4rem;">
+          <span style="display:inline-flex;align-items:center;gap:6px;padding:5px 14px;background:rgba(232,25,44,0.1);border:1px solid rgba(232,25,44,0.25);border-radius:20px;font-family:'Outfit',sans-serif;font-size:0.7rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem;">Simple & Rapide</span>
+          <h2 style="font-family:'Outfit',sans-serif;font-size:clamp(2rem,3.5vw,3rem);font-weight:800;color:#fff;line-height:1.1;">Commander en <span style="color:var(--accent);">3 étapes</span></h2>
+        </div>
+
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;" class="steps-grid">
+          {[
+            {
+              num: '01',
+              title: 'Contactez-nous sur WhatsApp',
+              desc: 'Envoyez-nous un message sur WhatsApp. Notre équipe répond en quelques minutes, 24h/7j.',
+              icon: `<svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 2.117.549 4.099 1.508 5.817L.057 23.887a.5.5 0 0 0 .556.556l6.07-1.451C8.362 23.658 10.118 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg>`,
+              color: '#22C55E',
+            },
+            {
+              num: '02',
+              title: 'Recevez vos accès en < 5 min',
+              desc: 'Après confirmation, vous recevez vos identifiants de connexion instantanément par WhatsApp.',
+              icon: `<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><bolt d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>`,
+              color: '#FFC107',
+            },
+            {
+              num: '03',
+              title: 'Profitez sur tous vos appareils',
+              desc: 'Installez l\'app Atlas Pro 9X sur votre Firestick, Smart TV, Android, iOS, PC — en 2 minutes.',
+              icon: `<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>`,
+              color: '#6FA0FF',
+            },
+          ].map(step => (
+            <div style={`background:var(--bg-card);border:1px solid var(--border);border-top:3px solid ${step.color};border-radius:14px;padding:2rem 1.75rem;position:relative;transition:transform .3s ease;`}
+              onmouseover="this.style.transform='translateY(-4px)'"
+              onmouseout="this.style.transform='translateY(0)'"
+            >
+              <div style={`font-family:'Outfit',sans-serif;font-size:3rem;font-weight:900;color:${step.color};opacity:0.15;position:absolute;top:1rem;right:1.5rem;line-height:1;`}>{step.num}</div>
+              <div style={`width:52px;height:52px;background:${step.color}22;border:1px solid ${step.color}44;border-radius:12px;display:flex;align-items:center;justify-content:center;color:${step.color};margin-bottom:1.25rem;`} set:html={step.icon}></div>
+              <div style={`font-family:'Outfit',sans-serif;font-size:0.65rem;font-weight:700;background:${step.color}22;color:${step.color};border-radius:20px;padding:3px 10px;display:inline-block;margin-bottom:0.75rem;letter-spacing:0.08em;`}>ÉTAPE {step.num}</div>
+              <h3 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:1.1rem;color:#fff;margin-bottom:0.75rem;line-height:1.3;">{step.title}</h3>
+              <p style="font-family:'Barlow',sans-serif;font-size:0.88rem;color:var(--text-muted);line-height:1.65;">{step.desc}</p>
+            </div>
+          ))}
+        </div>
+
+        <div style="text-align:center;margin-top:3rem;">
+          <a
+            href={WA_LINK}
+            target="_blank" rel="noopener"
+            style="display:inline-flex;align-items:center;gap:10px;padding:14px 32px;background:var(--accent);color:white;font-family:'Outfit',sans-serif;font-weight:700;font-size:1rem;border-radius:10px;text-decoration:none;transition:all .25s ease;"
+            onmouseover="this.style.background='#FF2D40';this.style.transform='translateY(-2px)'"
+            onmouseout="this.style.background='var(--accent)';this.style.transform='translateY(0)'"
+          >
+            Commencer maintenant sur WhatsApp
+          </a>
+        </div>
+      </div>
+      <div style="position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent);"></div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         SECTION 6: DEVICES ROW
+    ══════════════════════════════════════════ -->
+    <section style="padding:4rem 0;background:var(--bg);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+      <div style="max-width:1280px;margin:0 auto;padding:0 2rem;">
+        <p style="font-family:'Outfit',sans-serif;font-size:0.72rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--text-muted);text-align:center;margin-bottom:1.5rem;">Compatible avec tous vos appareils</p>
+        <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:1rem;">
+          {devices.map(d => (
+            <div style="display:flex;flex-direction:column;align-items:center;gap:8px;padding:16px 20px;background:var(--bg-card);border:1px solid var(--border);border-radius:12px;min-width:90px;transition:all .25s ease;"
+              onmouseover="this.style.borderColor='rgba(232,25,44,0.3)';this.style.transform='translateY(-3px)'"
+              onmouseout="this.style.borderColor='var(--border)';this.style.transform='translateY(0)'"
+            >
+              <span style="font-size:1.6rem;">{d.icon}</span>
+              <span style="font-family:'Outfit',sans-serif;font-size:0.78rem;font-weight:600;color:var(--text-muted);white-space:nowrap;">{d.label}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         SECTION 7: CONTENT CATEGORIES
+    ══════════════════════════════════════════ -->
+    <section style="position:relative;padding:6rem 0;background:var(--bg-section);overflow:hidden;">
+      <div style="position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent);"></div>
+      <div style="max-width:1280px;margin:0 auto;padding:0 2rem;position:relative;z-index:1;">
+
+        <div style="text-align:center;margin-bottom:3rem;">
+          <h2 style="font-family:'Outfit',sans-serif;font-size:clamp(2rem,3.5vw,3rem);font-weight:800;color:#fff;line-height:1.1;">
+            Tout le contenu dont vous avez <span style="color:var(--accent);">besoin</span>
+          </h2>
+        </div>
+
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;" class="categories-grid">
+          {categories.map(cat => (
+            <div style={`background:var(--bg-card);border:1px solid var(--border);border-radius:14px;padding:1.75rem;display:flex;align-items:flex-start;gap:1rem;transition:all .3s ease;position:relative;overflow:hidden;`}
+              onmouseover={`this.style.borderColor='${cat.color}55';this.style.transform='translateY(-3px)'`}
+              onmouseout="this.style.borderColor='var(--border)';this.style.transform='translateY(0)'"
+            >
+              <div style={`width:48px;height:48px;background:${cat.color}18;border:1px solid ${cat.color}33;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0;`}>{cat.icon}</div>
+              <div style="flex:1;">
+                <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:0.4rem;">
+                  <h3 style="font-family:'Outfit',sans-serif;font-weight:700;font-size:0.95rem;color:#fff;">{cat.title}</h3>
+                  <span style={`font-family:'Outfit',sans-serif;font-size:0.65rem;font-weight:700;background:${cat.color}22;color:${cat.color};padding:2px 8px;border-radius:10px;flex-shrink:0;`}>{cat.count}</span>
+                </div>
+                <p style="font-family:'Barlow',sans-serif;font-size:0.82rem;color:var(--text-muted);line-height:1.55;">{cat.sub}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+      <div style="position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent);"></div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         SECTION 8: 3 REVIEWS
+    ══════════════════════════════════════════ -->
+    <section style="position:relative;padding:6rem 0;background:var(--bg);overflow:hidden;">
+      <div style="position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent);"></div>
+      <div style="max-width:1280px;margin:0 auto;padding:0 2rem;position:relative;z-index:1;">
+
+        <div style="display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:1.5rem;margin-bottom:3rem;">
+          <div>
+            <h2 style="font-family:'Outfit',sans-serif;font-size:clamp(1.8rem,3vw,2.6rem);font-weight:800;color:#fff;line-height:1.1;">
+              Ce que disent nos <span style="color:var(--accent);">clients</span>
+            </h2>
+            <div style="display:flex;align-items:center;gap:10px;margin-top:0.75rem;">
+              <span style="color:var(--gold);font-size:1rem;letter-spacing:2px;">★★★★★</span>
+              <span style="font-family:'Outfit',sans-serif;font-weight:700;color:var(--gold);">{AGGREGATE_RATING.ratingValue}/5</span>
+              <span style="font-family:'Barlow',sans-serif;font-size:0.85rem;color:var(--text-muted);">— {AGGREGATE_RATING.ratingCount.toLocaleString('fr-FR')} avis vérifiés</span>
+            </div>
+          </div>
+          <a href="/avis" style="font-family:'Outfit',sans-serif;font-weight:600;font-size:0.9rem;color:var(--accent);text-decoration:none;border:1px solid rgba(232,25,44,0.3);padding:8px 18px;border-radius:8px;transition:all .2s;"
+            onmouseover="this.style.background='rgba(232,25,44,0.1)'"
+            onmouseout="this.style.background='transparent'"
+          >Voir tous les avis →</a>
+        </div>
+
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;" class="reviews-preview-grid">
+          {threeReviews.map((review, i) => (
+            <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:14px;padding:1.75rem;display:flex;flex-direction:column;gap:1rem;position:relative;overflow:hidden;transition:all .3s ease;"
+              onmouseover="this.style.borderColor='rgba(232,25,44,0.3)';this.style.transform='translateY(-3px)'"
+              onmouseout="this.style.borderColor='var(--border)';this.style.transform='translateY(0)'"
+            >
+              <span style="font-family:'Outfit',sans-serif;font-size:4rem;line-height:0.7;color:var(--accent);opacity:0.08;position:absolute;top:0.75rem;right:1.25rem;font-weight:900;">"</span>
+              <div style="color:var(--gold);font-size:0.85rem;letter-spacing:2px;">{'★'.repeat(review.rating)}</div>
+              <blockquote style="font-family:'Barlow',sans-serif;font-style:italic;font-size:0.95rem;line-height:1.75;color:var(--text-muted);flex:1;">"{review.text}"</blockquote>
+              <div style="display:flex;align-items:center;gap:10px;padding-top:1rem;border-top:1px solid var(--border);">
+                <div style={`width:36px;height:36px;background:${avatarColors[i]};border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;`}>
+                  <span style="font-family:'Outfit',sans-serif;font-weight:800;font-size:0.85rem;color:white;">{review.author.charAt(0)}</span>
+                </div>
+                <div>
+                  <div style="font-family:'Outfit',sans-serif;font-weight:700;font-size:0.85rem;color:#fff;">{review.author}</div>
+                  <div style="font-family:'Barlow',sans-serif;color:var(--text-muted);font-size:0.75rem;">{review.location}</div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div style="text-align:center;margin-top:2.5rem;">
+          <a href="/avis" style="font-family:'Outfit',sans-serif;font-weight:600;font-size:0.95rem;color:var(--text-muted);text-decoration:none;transition:color .2s;"
+            onmouseover="this.style.color='#fff'"
+            onmouseout="this.style.color='var(--text-muted)'"
+          >Voir tous les avis clients →</a>
+        </div>
+      </div>
+      <div style="position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent);"></div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         SECTION 9: QUICK FAQ
+    ══════════════════════════════════════════ -->
+    <section id="faq" style="position:relative;padding:6rem 0;background:var(--bg-section);overflow:hidden;">
+      <div style="position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent);"></div>
+      <div style="max-width:800px;margin:0 auto;padding:0 2rem;position:relative;z-index:1;">
+
+        <div style="text-align:center;margin-bottom:3rem;">
+          <h2 style="font-family:'Outfit',sans-serif;font-size:clamp(1.8rem,3vw,2.6rem);font-weight:800;color:#fff;line-height:1.1;">
+            Questions <span style="color:var(--accent);">fréquentes</span>
+          </h2>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:0.75rem;">
+          {faqItems.map(item => (
+            <details style="background:var(--bg-card);border:1px solid var(--border);border-radius:12px;overflow:hidden;transition:border-color .2s;">
+              <summary style="display:flex;align-items:center;justify-content:space-between;padding:1.25rem 1.5rem;cursor:pointer;font-family:'Outfit',sans-serif;font-weight:700;font-size:0.95rem;color:#fff;list-style:none;gap:1rem;">
+                {item.q}
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="flex-shrink:0;transition:transform .3s;"><polyline points="6,9 12,15 18,9"/></svg>
+              </summary>
+              <div style="padding:0 1.5rem 1.25rem;font-family:'Barlow',sans-serif;font-size:0.92rem;color:var(--text-muted);line-height:1.7;border-top:1px solid var(--border);">
+                <div style="padding-top:1rem;">{item.a}</div>
+              </div>
+            </details>
+          ))}
+        </div>
+      </div>
+      <div style="position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent);"></div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         SECTION 10: FINAL CTA
+    ══════════════════════════════════════════ -->
+    <section id="contact" style="position:relative;padding:6rem 0;background:linear-gradient(135deg,rgba(232,25,44,0.12) 0%,rgba(12,12,18,1) 60%);overflow:hidden;">
+      <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(232,25,44,0.15) 0%,transparent 65%);pointer-events:none;"></div>
+      <div style="position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(232,25,44,0.4),transparent);"></div>
+
+      <div style="max-width:700px;margin:0 auto;padding:0 2rem;text-align:center;position:relative;z-index:1;">
+        <h2 style="font-family:'Outfit',sans-serif;font-size:clamp(2rem,4vw,3.2rem);font-weight:900;color:#fff;line-height:1.1;margin-bottom:1rem;">
+          Prêt à commencer ?<br/>Essayez <span style="color:var(--accent);">gratuitement</span> pendant 24h
+        </h2>
+        <p style="font-family:'Barlow',sans-serif;color:var(--text-muted);font-size:1rem;line-height:1.7;margin-bottom:2.5rem;">
+          Aucune carte bancaire requise. Accès immédiat en moins de 5 minutes.
+        </p>
+
+        <a
+          href={WA_LINK}
+          target="_blank" rel="noopener"
+          style="display:inline-flex;align-items:center;gap:12px;padding:16px 40px;background:var(--accent);color:white;font-family:'Outfit',sans-serif;font-weight:800;font-size:1.05rem;border-radius:12px;text-decoration:none;transition:all .25s ease;margin-bottom:1.5rem;"
+          onmouseover="this.style.background='#FF2D40';this.style.transform='translateY(-3px)';this.style.boxShadow='0 20px 40px rgba(232,25,44,0.4)'"
+          onmouseout="this.style.background='var(--accent)';this.style.transform='translateY(0)';this.style.boxShadow='none'"
+        >
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M12 0C5.374 0 0 5.373 0 12c0 2.117.549 4.099 1.508 5.817L.057 23.887a.5.5 0 0 0 .556.556l6.07-1.451C8.362 23.658 10.118 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg>
+          Test Gratuit 24h — Sans CB
+        </a>
+
+        <div style="font-family:'Barlow',sans-serif;font-size:0.88rem;color:var(--text-muted);">
+          Ou commandez directement →
+          <a href="/abonnements" style="color:var(--accent);text-decoration:none;font-weight:600;margin-left:4px;">Dès 39,99 €/an</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+  <Footer />
+</BaseLayout>
+
+<style>
+  @media (max-width: 900px) {
+    .hero-grid { grid-template-columns: 1fr !important; }
+    .sports-grid { grid-template-columns: repeat(2, 1fr) !important; }
+    .steps-grid { grid-template-columns: 1fr !important; }
+    .categories-grid { grid-template-columns: repeat(2, 1fr) !important; }
+    .reviews-preview-grid { grid-template-columns: 1fr !important; }
+  }
+  @media (max-width: 600px) {
+    .sports-grid { grid-template-columns: repeat(2, 1fr) !important; }
+    .categories-grid { grid-template-columns: 1fr !important; }
+  }
+  details[open] summary svg { transform: rotate(180deg); }
+  details[open] { border-color: rgba(232,25,44,0.3) !important; }
+</style>

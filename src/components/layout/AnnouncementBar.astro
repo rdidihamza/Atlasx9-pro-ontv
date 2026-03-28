@@ -1,0 +1,71 @@
+---
+---
+<div id="announcement-bar" class="announce-bar">
+
+  <!-- Live dot + label -->
+  <div style="flex-shrink:0;padding:0 14px;border-right:1px solid rgba(232,25,44,0.15);height:100%;display:flex;align-items:center;gap:6px;">
+    <span style="width:6px;height:6px;background:var(--accent);border-radius:50%;animation:pulse-red 1.5s ease-in-out infinite;flex-shrink:0;"></span>
+    <span style="font-family:'Outfit',sans-serif;font-size:0.62rem;font-weight:700;letter-spacing:0.12em;color:var(--accent);white-space:nowrap;text-transform:uppercase;">Live</span>
+  </div>
+
+  <!-- Marquee ticker -->
+  <div class="marquee-container" style="flex:1;overflow:hidden;">
+    <div class="marquee-track">
+      <span style="font-family:'Outfit',sans-serif;font-size:0.72rem;color:rgba(255,255,255,0.55);white-space:nowrap;padding:0 2rem;font-weight:500;">
+        ⚽&nbsp; Coupe du Monde 2026 — TOUS les matchs en direct
+        &nbsp;&nbsp;·&nbsp;&nbsp;
+        🔥&nbsp; Atlas Pro 9X — Code Downloader : <strong style="color:var(--accent);font-family:'JetBrains Mono',monospace;">1989448</strong>
+        &nbsp;&nbsp;·&nbsp;&nbsp;
+        📺&nbsp; +15 000 chaînes HD · 4K · Full HD
+        &nbsp;&nbsp;·&nbsp;&nbsp;
+        🎁&nbsp; Essai gratuit 24h — sans carte bancaire
+        &nbsp;&nbsp;·&nbsp;&nbsp;
+        💎&nbsp; Abonnement dès 39,99€ / an
+        &nbsp;&nbsp;·&nbsp;&nbsp;
+        ⚡&nbsp; Livraison instantanée en moins de 5 min
+        &nbsp;&nbsp;·&nbsp;&nbsp;
+        🎬&nbsp; +70 000 Films &amp; Séries VOD illimitée
+        &nbsp;&nbsp;·&nbsp;&nbsp;
+        ⚽&nbsp; Coupe du Monde 2026 — TOUS les matchs en direct
+        &nbsp;&nbsp;·&nbsp;&nbsp;
+        🔥&nbsp; Atlas Pro 9X — Code Downloader : <strong style="color:var(--accent);font-family:'JetBrains Mono',monospace;">1989448</strong>
+        &nbsp;&nbsp;·&nbsp;&nbsp;
+        📺&nbsp; +15 000 chaînes HD · 4K · Full HD
+        &nbsp;&nbsp;·&nbsp;&nbsp;
+        🎁&nbsp; Essai gratuit 24h — sans carte bancaire
+        &nbsp;&nbsp;·&nbsp;&nbsp;
+        💎&nbsp; Abonnement dès 39,99€ / an
+        &nbsp;&nbsp;·&nbsp;&nbsp;
+        ⚡&nbsp; Livraison instantanée en moins de 5 min
+        &nbsp;&nbsp;·&nbsp;&nbsp;
+        🎬&nbsp; +70 000 Films &amp; Séries VOD illimitée
+      </span>
+    </div>
+  </div>
+
+  <!-- Close button -->
+  <button
+    id="close-announce"
+    style="flex-shrink:0;width:36px;height:100%;border:none;background:none;cursor:pointer;color:rgba(255,255,255,0.3);font-size:15px;border-left:1px solid rgba(232,25,44,0.1);transition:color .2s;"
+    onmouseover="this.style.color='rgba(255,255,255,0.7)'"
+    onmouseout="this.style.color='rgba(255,255,255,0.3)'"
+    aria-label="Fermer"
+  >×</button>
+</div>
+
+<script>
+  const bar = document.getElementById('announcement-bar');
+  const closeBtn = document.getElementById('close-announce');
+  const navbar = document.getElementById('navbar');
+
+  if (closeBtn && bar) {
+    closeBtn.addEventListener('click', () => {
+      bar.style.display = 'none';
+      // Shift navbar and sidebar up
+      if (navbar) navbar.style.top = '0px';
+      const sidebar = document.querySelector('.sidebar') as HTMLElement;
+      if (sidebar) sidebar.style.paddingTop = 'calc(var(--topbar-h) + 1rem)';
+      document.body.style.paddingTop = 'var(--topbar-h)';
+    });
+  }
+</script>

@@ -1,0 +1,57 @@
+---
+---
+<div id="cookie-banner" style="position:fixed;bottom:0;left:0;right:0;z-index:9999;padding:1rem 1.5rem;background:rgba(12,12,18,0.97);border-top:1px solid rgba(232,25,44,0.2);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);display:none;align-items:center;justify-content:space-between;gap:1.5rem;flex-wrap:wrap;">
+
+  <!-- Text -->
+  <div style="display:flex;align-items:flex-start;gap:12px;flex:1;min-width:280px;">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#E8192C" stroke-width="2" style="flex-shrink:0;margin-top:2px;"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
+    <p style="font-family:'Barlow',sans-serif;font-size:0.85rem;color:rgba(255,255,255,0.7);line-height:1.65;margin:0;">
+      Ce site utilise des cookies techniques nécessaires à son fonctionnement.
+      En continuant, vous acceptez leur utilisation.
+      <a href="/mentions-legales#confidentialite" style="color:var(--accent,#E8192C);text-decoration:underline;text-underline-offset:3px;white-space:nowrap;">
+        En savoir plus
+      </a>
+    </p>
+  </div>
+
+  <!-- Buttons -->
+  <div style="display:flex;gap:0.75rem;flex-shrink:0;flex-wrap:wrap;">
+    <button
+      id="cookie-reject"
+      style="padding:9px 20px;background:transparent;border:1px solid rgba(255,255,255,0.15);border-radius:7px;color:rgba(255,255,255,0.5);font-family:'Outfit',sans-serif;font-size:0.8rem;font-weight:600;cursor:pointer;transition:all .2s;white-space:nowrap;"
+      onmouseover="this.style.borderColor='rgba(255,255,255,0.3)';this.style.color='rgba(255,255,255,0.8)'"
+      onmouseout="this.style.borderColor='rgba(255,255,255,0.15)';this.style.color='rgba(255,255,255,0.5)'"
+    >
+      Refuser
+    </button>
+    <button
+      id="cookie-accept"
+      style="padding:9px 24px;background:var(--accent,#E8192C);border:none;border-radius:7px;color:white;font-family:'Outfit',sans-serif;font-size:0.8rem;font-weight:700;cursor:pointer;transition:background .2s;white-space:nowrap;"
+      onmouseover="this.style.background='#FF2D40'"
+      onmouseout="this.style.background='var(--accent,#E8192C)'"
+    >
+      Accepter
+    </button>
+  </div>
+</div>
+
+<script>
+  const banner = document.getElementById('cookie-banner') as HTMLElement;
+  const acceptBtn = document.getElementById('cookie-accept');
+  const rejectBtn = document.getElementById('cookie-reject');
+
+  const consent = localStorage.getItem('cookie-consent');
+  if (!consent) {
+    banner.style.display = 'flex';
+  }
+
+  acceptBtn?.addEventListener('click', () => {
+    localStorage.setItem('cookie-consent', 'accepted');
+    banner.style.display = 'none';
+  });
+
+  rejectBtn?.addEventListener('click', () => {
+    localStorage.setItem('cookie-consent', 'rejected');
+    banner.style.display = 'none';
+  });
+</script>

@@ -1,0 +1,96 @@
+---
+import { FAQ_ITEMS } from '../../data/faq';
+
+const jsonLdFaq = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": FAQ_ITEMS.map(item => ({
+    "@type": "Question",
+    "name": item.q,
+    "acceptedAnswer": { "@type": "Answer", "text": item.a }
+  }))
+};
+---
+<script type="application/ld+json" set:html={JSON.stringify(jsonLdFaq)} />
+
+<section id="faq" style="position:relative;padding:7rem 0;background:var(--bg);overflow:hidden;">
+
+  <div class="orb" style="width:400px;height:400px;background:radial-gradient(circle,rgba(232,25,44,0.05) 0%,transparent 70%);top:50%;right:-80px;transform:translateY(-50%);"></div>
+  <div style="position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent);"></div>
+
+  <div style="max-width:860px;margin:0 auto;padding:0 1.5rem;position:relative;z-index:1;">
+
+    <!-- Header -->
+    <div style="text-align:center;margin-bottom:4rem;" class="fade-in-up">
+      <span class="section-label lbl-red">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        FAQ
+      </span>
+      <h2 style="font-family:'Outfit',sans-serif;font-size:clamp(2.2rem,3.8vw,3.2rem);font-weight:800;color:#fff;margin-top:0.75rem;margin-bottom:1rem;line-height:1.1;">
+        Questions <span style="color:var(--accent);">fréquentes</span>
+      </h2>
+      <p style="font-family:'Barlow',sans-serif;font-size:1rem;color:var(--text-muted);max-width:460px;margin:0 auto;line-height:1.8;">
+        Tout ce que vous devez savoir sur Atlas Pro ONTV.
+      </p>
+    </div>
+
+    <!-- FAQ Accordion — filmbox dark card style -->
+    <div style="display:flex;flex-direction:column;gap:0.75rem;" class="fade-in-up">
+      {FAQ_ITEMS.map((item, index) => (
+        <details
+          class="faq-item"
+          style="background:var(--bg-card);border:1px solid var(--border);border-radius:12px;overflow:hidden;transition:border-color 0.25s ease;"
+        >
+          <summary style="display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:1.25rem 1.5rem;cursor:pointer;list-style:none;user-select:none;">
+            <div style="display:flex;align-items:center;gap:14px;flex:1;">
+              <!-- Index number -->
+              <span style="width:28px;height:28px;min-width:28px;background:var(--accent-dim);border:1px solid var(--border-accent);border-radius:7px;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:0.65rem;font-weight:600;color:var(--accent);letter-spacing:0.05em;">
+                {String(index + 1).padStart(2, '0')}
+              </span>
+              <span style="font-family:'Outfit',sans-serif;font-weight:600;font-size:0.95rem;color:#fff;line-height:1.4;">{item.q}</span>
+            </div>
+            <svg class="faq-chevron" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2" style="flex-shrink:0;">
+              <polyline points="6,9 12,15 18,9"/>
+            </svg>
+          </summary>
+
+          <div class="faq-content" style="padding:0 1.5rem 1.25rem;padding-left:calc(1.5rem + 28px + 14px);">
+            <p style="font-family:'Barlow',sans-serif;font-size:0.9rem;line-height:1.85;color:var(--text-muted);">{item.a}</p>
+          </div>
+        </details>
+      ))}
+    </div>
+
+    <!-- Support box -->
+    <div style="margin-top:3rem;padding:2rem 2.25rem;background:var(--bg-card);border:1px solid var(--border);border-radius:14px;display:flex;align-items:center;justify-content:space-between;gap:1.5rem;flex-wrap:wrap;" class="fade-in-up">
+      <div>
+        <h3 style="font-family:'Outfit',sans-serif;font-size:1.35rem;font-weight:800;color:#fff;margin-bottom:0.3rem;">Une question sans réponse ?</h3>
+        <p style="font-family:'Barlow',sans-serif;font-size:0.875rem;color:var(--text-muted);line-height:1.6;">Notre équipe francophone répond en moins de 5 minutes sur WhatsApp.</p>
+      </div>
+      <a
+        href="https://wa.me/33XXXXXXXXX?text=Bonjour%2C+j%27ai+une+question+sur+Atlas+Pro+ONTV"
+        target="_blank"
+        rel="noopener"
+        class="btn-primary"
+        style="flex-shrink:0;"
+      >
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 2.117.549 4.099 1.508 5.817L.057 23.887a.5.5 0 0 0 .556.556l6.07-1.451C8.362 23.658 10.118 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm5.53 17.12c-.272.767-1.571 1.462-2.147 1.524-.549.058-1.25.084-2.015-.124-.464-.13-1.059-.302-1.825-.631-3.21-1.387-5.3-4.626-5.462-4.839-.163-.214-1.329-1.768-1.329-3.374 0-1.604.839-2.392 1.137-2.718.271-.296.591-.37.789-.37.197 0 .394.002.566.01.182.008.426-.069.667.509.251.599.853 2.083.927 2.234.075.152.124.33.025.532-.099.2-.149.327-.296.503-.148.175-.311.392-.444.527-.148.148-.302.31-.13.607.173.297.769 1.268 1.651 2.053 1.133 1.011 2.089 1.325 2.386 1.473.297.148.47.124.643-.074.173-.198.74-.863 1.038-1.16.198-.198.397-.149.668.025.272.173 1.727.815 2.024.964.297.149.495.223.568.347.074.124.074.718-.198 1.485z"/></svg>
+        Contacter le Support
+      </a>
+    </div>
+
+  </div>
+
+  <div style="position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent);"></div>
+</section>
+
+<style>
+  details.faq-item[open] { border-color: var(--border-accent); }
+</style>
+
+<script>
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('#faq .fade-in-up').forEach(el => obs.observe(el));
+</script>

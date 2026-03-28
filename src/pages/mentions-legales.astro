@@ -1,0 +1,259 @@
+---
+import BaseLayout from '../components/layout/BaseLayout.astro';
+import AnnouncementBar from '../components/layout/AnnouncementBar.astro';
+import Navbar from '../components/layout/Navbar.astro';
+import Footer from '../components/layout/Footer.astro';
+---
+
+<BaseLayout
+  title="Mentions Légales, CGU & Politique de Confidentialité — Atlas Pro ONTV"
+  description="Mentions légales, conditions générales d'utilisation, politique de confidentialité RGPD et politique de remboursement d'Atlas Pro ONTV."
+  canonical="https://atlasproontv.fr/mentions-legales"
+>
+  <AnnouncementBar />
+  <Navbar />
+
+  <main style="min-height:100vh;background:var(--bg,#0C0C12);padding:5rem 0;">
+    <div style="max-width:860px;margin:0 auto;padding:0 1.5rem;">
+
+      <!-- Header -->
+      <div style="margin-bottom:3rem;">
+        <a href="/" style="display:inline-flex;align-items:center;gap:6px;font-family:'Outfit',sans-serif;font-size:0.8rem;color:var(--text-muted,#8899aa);text-decoration:none;margin-bottom:1.5rem;transition:color .2s;"
+          onmouseover="this.style.color='var(--accent,#E8192C)'"
+          onmouseout="this.style.color='var(--text-muted,#8899aa)'"
+        >
+          ← Retour à l'accueil
+        </a>
+        <h1 style="font-family:'Outfit',sans-serif;font-size:clamp(2rem,4vw,2.75rem);font-weight:900;color:#fff;margin-bottom:0.75rem;">
+          Mentions Légales
+        </h1>
+        <p style="font-family:'Barlow',sans-serif;font-size:0.9rem;color:var(--text-muted,#8899aa);">
+          Dernière mise à jour : 28 mars 2026
+        </p>
+      </div>
+
+      <!-- Quick nav -->
+      <nav style="padding:1.25rem 1.5rem;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:10px;margin-bottom:3rem;">
+        <p style="font-family:'Outfit',sans-serif;font-size:0.75rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-muted,#8899aa);margin-bottom:0.75rem;">Sommaire</p>
+        <div style="display:flex;flex-wrap:wrap;gap:0.5rem 1.5rem;">
+          {[
+            { label: 'Éditeur du site', id: 'editeur' },
+            { label: 'Hébergement', id: 'hebergement' },
+            { label: "Conditions d'utilisation", id: 'cgv' },
+            { label: 'Confidentialité & RGPD', id: 'confidentialite' },
+            { label: 'Politique de remboursement', id: 'remboursement' },
+            { label: 'Propriété intellectuelle', id: 'propriete' },
+            { label: 'Contact', id: 'contact-legal' },
+          ].map(item => (
+            <a href={`#${item.id}`} style="font-family:'Barlow',sans-serif;font-size:0.85rem;color:var(--accent,#E8192C);text-decoration:none;">
+              {item.label}
+            </a>
+          ))}
+        </div>
+      </nav>
+
+      <div class="legal-content">
+
+        <!-- Éditeur -->
+        <section id="editeur" style="margin-bottom:3rem;">
+          <h2>1. Éditeur du site</h2>
+          <p>Le site <strong>atlasproontv.fr</strong> est édité par :</p>
+          <ul>
+            <li><strong>Raison sociale :</strong> Atlas Pro ONTV</li>
+            <li><strong>Adresse :</strong> France</li>
+            <li><strong>Email :</strong> support@atlasproontv.fr</li>
+            <li><strong>WhatsApp :</strong> Disponible via le bouton de contact sur le site</li>
+            <li><strong>Responsable de publication :</strong> Atlas Pro ONTV</li>
+          </ul>
+        </section>
+
+        <!-- Hébergement -->
+        <section id="hebergement" style="margin-bottom:3rem;">
+          <h2>2. Hébergement</h2>
+          <p>Ce site est hébergé par des prestataires d'hébergement web professionnels situés en Europe, conformément aux réglementations RGPD applicables.</p>
+        </section>
+
+        <!-- CGV / CGU -->
+        <section id="cgv" style="margin-bottom:3rem;">
+          <h2>3. Conditions Générales d'Utilisation (CGU)</h2>
+
+          <h3>3.1 Objet</h3>
+          <p>Les présentes CGU régissent l'utilisation du service de streaming Atlas Pro ONTV accessible sur atlasproontv.fr. En utilisant le service, vous acceptez l'intégralité des présentes conditions.</p>
+
+          <h3>3.2 Description du service</h3>
+          <p>Atlas Pro ONTV est un service d'abonnement IPTV permettant d'accéder à des flux de télévision via Internet. Le service comprend :</p>
+          <ul>
+            <li>Accès à +15 000 chaînes de télévision en direct (SD, HD, Full HD, 4K)</li>
+            <li>Accès à +70 000 films et séries en VOD</li>
+            <li>Guide électronique des programmes (EPG) sur 7 jours</li>
+            <li>Fonction Catch-Up TV (replay) jusqu'à 7 jours</li>
+          </ul>
+
+          <h3>3.3 Conditions d'accès</h3>
+          <p>L'accès au service requiert :</p>
+          <ul>
+            <li>Un abonnement actif et payé</li>
+            <li>Une connexion Internet d'au minimum 10 Mbps (25 Mbps recommandés pour la 4K)</li>
+            <li>Un appareil compatible (Android, iOS, Smart TV, Firestick, MAG, PC, Mac)</li>
+          </ul>
+
+          <h3>3.4 Obligations de l'abonné</h3>
+          <p>L'abonné s'engage à :</p>
+          <ul>
+            <li>Ne pas partager ses identifiants avec des tiers</li>
+            <li>N'utiliser le service que pour un usage strictement personnel</li>
+            <li>Ne pas tenter de contourner les systèmes de protection du service</li>
+            <li>Ne pas utiliser le service à des fins commerciales sans autorisation</li>
+          </ul>
+
+          <h3>3.5 Limitation de responsabilité</h3>
+          <p>Atlas Pro ONTV s'engage à fournir un service de qualité avec un taux de disponibilité cible de 99,9 %. Toutefois, des interruptions temporaires peuvent survenir pour des raisons de maintenance ou de force majeure. Atlas Pro ONTV ne saurait être tenu responsable des interruptions dues à des tiers (fournisseurs d'accès Internet, pannes réseau).</p>
+        </section>
+
+        <!-- Confidentialité -->
+        <section id="confidentialite" style="margin-bottom:3rem;">
+          <h2>4. Politique de Confidentialité & RGPD</h2>
+
+          <h3>4.1 Données collectées</h3>
+          <p>Dans le cadre de la fourniture du service, Atlas Pro ONTV peut collecter les données suivantes :</p>
+          <ul>
+            <li><strong>Données d'identification :</strong> nom, prénom, adresse email</li>
+            <li><strong>Données de contact :</strong> numéro WhatsApp (si fourni)</li>
+            <li><strong>Données de connexion :</strong> adresse IP, type d'appareil, logs de connexion</li>
+            <li><strong>Données de navigation :</strong> pages visitées, durée des sessions</li>
+          </ul>
+
+          <h3>4.2 Finalités du traitement</h3>
+          <p>Les données sont collectées pour :</p>
+          <ul>
+            <li>Gérer les abonnements et les accès au service</li>
+            <li>Fournir le support client</li>
+            <li>Améliorer le service</li>
+            <li>Respecter les obligations légales</li>
+          </ul>
+
+          <h3>4.3 Base légale</h3>
+          <p>Le traitement des données est fondé sur l'exécution du contrat d'abonnement (Article 6.1.b du RGPD) et les intérêts légitimes du responsable du traitement (Article 6.1.f du RGPD).</p>
+
+          <h3>4.4 Durée de conservation</h3>
+          <p>Les données personnelles sont conservées pendant toute la durée de l'abonnement, puis pendant 3 ans à compter de la fin du contrat, conformément aux obligations légales.</p>
+
+          <h3>4.5 Vos droits</h3>
+          <p>Conformément au RGPD, vous disposez des droits suivants :</p>
+          <ul>
+            <li><strong>Droit d'accès</strong> à vos données personnelles</li>
+            <li><strong>Droit de rectification</strong> des données inexactes</li>
+            <li><strong>Droit à l'effacement</strong> (« droit à l'oubli »)</li>
+            <li><strong>Droit d'opposition</strong> au traitement</li>
+            <li><strong>Droit à la portabilité</strong> des données</li>
+          </ul>
+          <p>Pour exercer ces droits, contactez-nous à : <a href="mailto:support@atlasproontv.fr">support@atlasproontv.fr</a></p>
+
+          <h3>4.6 Cookies</h3>
+          <p>Ce site utilise des cookies techniques nécessaires au fonctionnement. Aucun cookie publicitaire ou de traçage tiers n'est installé sans votre consentement explicite. Vous pouvez configurer votre navigateur pour refuser les cookies.</p>
+        </section>
+
+        <!-- Remboursement -->
+        <section id="remboursement" style="margin-bottom:3rem;">
+          <h2>5. Politique de Remboursement</h2>
+
+          <h3>5.1 Garantie satisfait ou remboursé 30 jours</h3>
+          <p>Atlas Pro ONTV offre une <strong>garantie de remboursement intégral de 30 jours</strong> à compter de la date d'achat. Si vous n'êtes pas satisfait du service pour quelque raison que ce soit, vous pouvez demander un remboursement complet dans ce délai.</p>
+
+          <h3>5.2 Procédure de remboursement</h3>
+          <p>Pour demander un remboursement :</p>
+          <ul>
+            <li>Contactez notre support via WhatsApp ou email dans les 30 jours suivant l'achat</li>
+            <li>Indiquez votre nom, email et numéro de commande</li>
+            <li>Le remboursement sera effectué dans les 5 à 10 jours ouvrés via le mode de paiement original</li>
+          </ul>
+
+          <h3>5.3 Exceptions</h3>
+          <p>Le remboursement ne s'applique pas :</p>
+          <ul>
+            <li>En cas d'abus avérés des conditions d'utilisation</li>
+            <li>Après le délai de 30 jours suivant l'achat</li>
+          </ul>
+
+          <h3>5.4 Essai gratuit 24h</h3>
+          <p>Avant tout achat, nous proposons un essai gratuit de 24 heures sans engagement et sans carte bancaire. Profitez de cette période pour évaluer le service.</p>
+        </section>
+
+        <!-- Propriété intellectuelle -->
+        <section id="propriete" style="margin-bottom:3rem;">
+          <h2>6. Propriété Intellectuelle</h2>
+          <p>L'ensemble du contenu du site atlasproontv.fr (textes, visuels, interface, code) est protégé par le droit d'auteur. Toute reproduction, même partielle, est interdite sans autorisation préalable écrite d'Atlas Pro ONTV.</p>
+          <p>La marque « Atlas Pro ONTV » et le logo associé sont des propriétés de Atlas Pro ONTV. Toute utilisation non autorisée est interdite.</p>
+        </section>
+
+        <!-- Contact légal -->
+        <section id="contact-legal" style="margin-bottom:3rem;">
+          <h2>7. Contact</h2>
+          <p>Pour toute question relative aux présentes mentions légales :</p>
+          <ul>
+            <li><strong>Email :</strong> <a href="mailto:support@atlasproontv.fr">support@atlasproontv.fr</a></li>
+            <li><strong>WhatsApp :</strong> Disponible 24h/24, 7j/7 via le bouton de contact</li>
+          </ul>
+        </section>
+
+        <!-- Droit applicable -->
+        <section style="margin-bottom:3rem;padding:1.5rem;background:rgba(232,25,44,0.04);border:1px solid rgba(232,25,44,0.12);border-radius:10px;">
+          <p style="font-family:'Barlow',sans-serif;font-size:0.85rem;color:var(--text-muted,#8899aa);line-height:1.7;margin:0;">
+            <strong style="color:#fff;">Droit applicable :</strong> Les présentes mentions légales sont soumises au droit français. En cas de litige, les tribunaux français seront seuls compétents. Tout litige de consommation peut être soumis à un médiateur de la consommation conformément aux articles L.611-1 et suivants du Code de la consommation.
+          </p>
+        </section>
+
+      </div>
+
+    </div>
+  </main>
+
+  <Footer />
+
+  <style is:global>
+    .legal-content h2 {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 800;
+      font-size: 1.35rem;
+      color: #fff;
+      margin-top: 0;
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid rgba(232,25,44,0.2);
+    }
+    .legal-content h3 {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      color: rgba(255,255,255,0.85);
+      margin-top: 1.5rem;
+      margin-bottom: 0.6rem;
+    }
+    .legal-content p {
+      font-family: 'Barlow', sans-serif;
+      font-size: 0.9rem;
+      color: var(--text-muted, #8899aa);
+      line-height: 1.8;
+      margin-bottom: 0.9rem;
+    }
+    .legal-content ul {
+      padding-left: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    .legal-content li {
+      font-family: 'Barlow', sans-serif;
+      font-size: 0.9rem;
+      color: var(--text-muted, #8899aa);
+      line-height: 1.8;
+      margin-bottom: 0.3rem;
+    }
+    .legal-content li::marker { color: #E8192C; }
+    .legal-content a {
+      color: #E8192C;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    .legal-content strong { color: #fff; }
+  </style>
+
+</BaseLayout>

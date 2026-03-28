@@ -1,0 +1,174 @@
+---
+const platforms = [
+  {
+    name: "Android & Firestick",
+    desc: "Smartphone, tablette, Fire TV Stick",
+    badge: "Recommandé",
+    badgeColor: "#22c55e",
+    guide: "1. Installez 'Downloader'\n2. Entrez le code 9380782\n3. Installez l'APK\n4. Activez votre abonnement",
+    icon: `<svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M17.6 9.48l1.84-3.18c.16-.31.04-.69-.26-.85-.29-.15-.65-.06-.83.22l-1.88 3.24A10.27 10.27 0 0 0 12 8c-1.53 0-2.98.35-4.47.91L5.65 5.67c-.19-.29-.56-.37-.85-.22-.3.16-.42.54-.26.85L6.4 9.48C4.2 10.8 2.7 13 2.5 15.5h19c-.2-2.5-1.7-4.7-3.9-6.02z" fill="#3ddc84"/>
+      <circle cx="8.5" cy="12.5" r="1" fill="#0a0a18"/>
+      <circle cx="15.5" cy="12.5" r="1" fill="#0a0a18"/>
+    </svg>`,
+    color: "#3ddc84",
+  },
+  {
+    name: "Amazon Firestick",
+    desc: "Fire TV Stick, Fire TV Cube",
+    badge: "Populaire",
+    badgeColor: "#f97316",
+    guide: "1. App Store > 'Downloader'\n2. Code 9380782 (IBO recommandé)\n3. Sources inconnues: Paramètres > Ma Fire TV\n4. Installez & profitez",
+    icon: `<svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="2" y="7" width="20" height="10" rx="5" fill="#f97316" opacity="0.9"/>
+      <circle cx="7" cy="12" r="2" fill="white"/>
+      <rect x="11" y="11" width="8" height="2" rx="1" fill="white" opacity="0.7"/>
+      <path d="M12 2 L12 5" stroke="#f97316" stroke-width="2" stroke-linecap="round"/>
+    </svg>`,
+    color: "#f97316",
+  },
+  {
+    name: "Smart TV Samsung & LG",
+    desc: "Tizen OS, WebOS, Android TV",
+    badge: null,
+    badgeColor: null,
+    guide: "Samsung: App Store > 'IPTV Smarters'\nLG: App Store > 'Smarters'\nAndroid TV: 'TiviMate' ou code Downloader\nRoku: Canal+ Store disponible",
+    icon: `<svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="2" y="3" width="20" height="14" rx="2" stroke="#3D9BE9" stroke-width="2" fill="rgba(61,155,233,0.1)"/>
+      <path d="M8 21h8M12 17v4" stroke="#3D9BE9" stroke-width="2" stroke-linecap="round"/>
+      <circle cx="12" cy="10" r="2.5" fill="#3D9BE9" opacity="0.8"/>
+    </svg>`,
+    color: "#3D9BE9",
+  },
+  {
+    name: "iPhone & iPad (iOS)",
+    desc: "iPhone, iPad, Apple TV",
+    badge: null,
+    badgeColor: null,
+    guide: "iOS: App Store > 'Smarters Player Lite'\nApple TV: 'Smarters Player Lite'\nOu 'IPTVX' pour usage avancé\nEntrez vos identifiants Xtream",
+    icon: `<svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="6" y="2" width="12" height="20" rx="3" stroke="#94a3b8" stroke-width="2" fill="rgba(148,163,184,0.1)"/>
+      <line x1="12" y1="18" x2="12" y2="18.5" stroke="#94a3b8" stroke-width="2" stroke-linecap="round"/>
+      <line x1="10" y1="5" x2="14" y2="5" stroke="#94a3b8" stroke-width="1.5" stroke-linecap="round"/>
+    </svg>`,
+    color: "#94a3b8",
+  },
+  {
+    name: "PC Windows & Mac",
+    desc: "Ordinateurs Windows et macOS",
+    badge: null,
+    badgeColor: null,
+    guide: "Windows: Téléchargez 'Atlas Pro Windows'\nMac: Téléchargez 'Atlas Pro Mac OS'\nOu utilisez le lecteur VLC avec M3U\nCompatible Chrome via extension",
+    icon: `<svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="2" y="3" width="20" height="14" rx="2" stroke="#6ee7f7" stroke-width="2" fill="rgba(110,231,247,0.08)"/>
+      <line x1="8" y1="21" x2="16" y2="21" stroke="#6ee7f7" stroke-width="2" stroke-linecap="round"/>
+      <line x1="12" y1="17" x2="12" y2="21" stroke="#6ee7f7" stroke-width="2" stroke-linecap="round"/>
+      <rect x="6" y="6" width="12" height="8" rx="1" fill="rgba(110,231,247,0.2)"/>
+    </svg>`,
+    color: "#6ee7f7",
+  },
+  {
+    name: "Boîtier MAG",
+    desc: "MAG 250, 254, 256, 322, 324, 410, 420",
+    badge: null,
+    badgeColor: null,
+    guide: "MAG: Paramètres > Système > Portail\nEntrez l'URL portail Stalker fournie\nRedémarrez le boîtier\nProfitez de +15 000 chaînes",
+    icon: `<svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="1" y="6" width="22" height="12" rx="3" stroke="#f59e0b" stroke-width="2" fill="rgba(245,158,11,0.08)"/>
+      <circle cx="8" cy="12" r="2" fill="#f59e0b" opacity="0.7"/>
+      <rect x="12" y="10" width="7" height="2" rx="1" fill="#f59e0b" opacity="0.5"/>
+      <rect x="12" y="13" width="5" height="1.5" rx="0.75" fill="#f59e0b" opacity="0.4"/>
+    </svg>`,
+    color: "#f59e0b",
+  },
+];
+---
+<section id="appareils" style="padding: 6rem 0; background: var(--bg-section); position:relative; overflow:hidden;">
+  <div style="position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent);"></div>
+  <div style="max-width: 1280px; margin: 0 auto; padding: 0 1.5rem; position:relative;z-index:1;">
+    <!-- Header -->
+    <div style="text-align: center; margin-bottom: 4rem;" class="fade-in-up">
+      <span class="section-label lbl-red">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+        Multi-Appareils
+      </span>
+      <h2 style="font-family:'Outfit',sans-serif; font-weight: 800; font-size: clamp(2rem, 3.5vw, 3rem); color: #fff; margin-top:0.75rem; margin-bottom: 1rem; line-height:1.1;">
+        Compatible avec <span style="color:var(--accent);">tous vos appareils</span>
+      </h2>
+      <p style="font-family:'Barlow',sans-serif; color: var(--text-muted); font-size: 1rem; max-width: 540px; margin: 0 auto; line-height:1.8;">
+        Regardez Atlas Pro ONTV sur n'importe quel écran — télévision, smartphone, tablette ou ordinateur.
+      </p>
+    </div>
+
+    <!-- Platform cards grid -->
+    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem;" class="platforms-grid fade-in-up">
+      {platforms.map(platform => (
+        <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; transition: all 0.3s;"
+          onmouseover="this.style.borderColor='rgba(232,25,44,0.3)';this.style.transform='translateY(-3px)'"
+          onmouseout="this.style.borderColor='var(--border)';this.style.transform='translateY(0)'"
+        >
+          <!-- Card header -->
+          <div style="padding: 1.5rem 1.5rem 0;">
+            <div style="display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 1rem;">
+              <div style="width:50px;height:50px;background:var(--bg-elevated);border:1px solid var(--border);border-radius:12px;display:flex;align-items:center;justify-content:center;">
+                <Fragment set:html={platform.icon} />
+              </div>
+              {platform.badge && (
+                <span style={`background:rgba(${platform.badgeColor === '#22c55e' ? '34,197,94' : '249,115,22'},0.1);border:1px solid rgba(${platform.badgeColor === '#22c55e' ? '34,197,94' : '249,115,22'},0.3);color:${platform.badgeColor};padding:3px 10px;border-radius:20px;font-family:'Outfit',sans-serif;font-size:0.68rem;font-weight:700;letter-spacing:0.06em;`}>
+                  {platform.badge}
+                </span>
+              )}
+            </div>
+            <h3 style="font-family:'Outfit',sans-serif;font-weight:700;color:#fff;font-size:0.95rem;margin-bottom:0.4rem;">{platform.name}</h3>
+            <p style="font-family:'Barlow',sans-serif;color:var(--text-muted);font-size:0.83rem;margin-bottom:1.25rem;">{platform.desc}</p>
+          </div>
+
+          <!-- Collapsible guide -->
+          <details style="border-top:1px solid var(--border);">
+            <summary style="padding:1rem 1.5rem;display:flex;align-items:center;justify-content:space-between;color:var(--accent);font-family:'Outfit',sans-serif;font-size:0.83rem;font-weight:600;cursor:pointer;user-select:none;">
+              Voir le guide d'installation
+              <svg class="faq-chevron" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><polyline points="6,9 12,15 18,9"/></svg>
+            </summary>
+            <div style="padding:0 1.5rem 1.5rem;">
+              <div style="background:var(--accent-muted);border:1px solid var(--border-accent);border-radius:8px;padding:0.875rem;">
+                <pre style="color:var(--text-dim);font-family:'JetBrains Mono',monospace;font-size:0.75rem;line-height:1.7;white-space:pre-wrap;margin:0;">{platform.guide}</pre>
+              </div>
+              <a
+                href="/telechargement"
+                style="display:inline-flex;align-items:center;gap:6px;margin-top:0.875rem;color:var(--accent);font-family:'Outfit',sans-serif;font-size:0.8rem;font-weight:600;text-decoration:none;"
+              >
+                Guide complet →
+              </a>
+            </div>
+          </details>
+        </div>
+      ))}
+    </div>
+
+    <!-- Bottom note -->
+    <div style="text-align:center;margin-top:3rem;" class="fade-in-up">
+      <p style="font-family:'Barlow',sans-serif;color:var(--text-muted);font-size:0.875rem;">
+        Besoin d'aide pour l'installation ?
+        <a
+          href="https://wa.me/33XXXXXXXXX?text=Bonjour%2C+j%27ai+besoin+d%27aide+pour+installer+Atlas+Pro+ONTV"
+          target="_blank"
+          rel="noopener"
+          style="color:var(--green);font-family:'Outfit',sans-serif;font-weight:600;text-decoration:none;margin-left:4px;"
+        >
+          Contactez notre support WhatsApp
+        </a>
+        — réponse en moins de 5 minutes.
+      </p>
+    </div>
+  </div>
+  <div style="position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent);"></div>
+</section>
+
+<style>
+  @media (max-width: 1024px) {
+    .platforms-grid { grid-template-columns: repeat(2, 1fr) !important; }
+  }
+  @media (max-width: 600px) {
+    .platforms-grid { grid-template-columns: 1fr !important; }
+  }
+</style>
